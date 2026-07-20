@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy: #0d1b3e;
+  --navy-light: #1a2f5e;
+  --gold: #c9a227;
+  --gold-light: #e8b84b;
+  --cream: #fdf8f0;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white text-gray-900;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-navy {
+    color: var(--navy);
+  }
+  .bg-navy {
+    background-color: var(--navy);
+  }
+  .bg-navy-light {
+    background-color: var(--navy-light);
+  }
+  .text-gold {
+    color: var(--gold);
+  }
+  .bg-gold {
+    background-color: var(--gold);
+  }
+  .bg-gold-light {
+    background-color: var(--gold-light);
+  }
+  .border-gold {
+    border-color: var(--gold);
+  }
+  .gradient-navy {
+    background: linear-gradient(135deg, #0d1b3e 0%, #1a2f5e 50%, #0d1b3e 100%);
+  }
+  .gradient-gold {
+    background: linear-gradient(135deg, #c9a227 0%, #e8b84b 100%);
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.7s ease forwards;
+}
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+
+/* Navbar */
+.nav-link {
+  @apply text-gray-200 hover:text-yellow-400 transition-colors duration-200 font-medium text-sm;
+}
+
+/* Service card hover */
+.service-card {
+  @apply bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer;
+}
+
+/* Section label */
+.section-label {
+  @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-amber-600 mb-3;
+}
+
+/* Gold button */
+.btn-gold {
+  @apply inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold px-6 py-3 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-sm;
+}
+
+/* Navy outlined button */
+.btn-navy-outline {
+  @apply inline-flex items-center gap-2 border-2 border-white text-white hover:bg-white hover:text-[#0d1b3e] font-semibold px-6 py-3 rounded-full transition-all duration-200 text-sm;
+}
+
+.btn-navy {
+  @apply inline-flex items-center gap-2 bg-[#0d1b3e] hover:bg-[#1a2f5e] text-white font-semibold px-6 py-3 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-sm;
+}
+
+/* Stat card */
+.stat-card {
+  @apply flex flex-col items-center justify-center gap-1 py-6 px-4;
+}
+
+/* Process step */
+.process-step {
+  @apply flex flex-col items-center text-center gap-3 relative;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #c9a227;
+  border-radius: 3px;
+}

@@ -1,0 +1,16 @@
+{
+  "name": "handtohand-services",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hand to Hand Services Pvt. Ltd. — full-stack monorepo (Next.js frontend + Express backend).",
+  "scripts": {
+    "install:all": "npm --prefix frontend install && npm --prefix backend install",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
+    "build:frontend": "npm --prefix frontend run build",
+    "build:backend": "npm --prefix backend run build",
+    "typecheck:frontend": "npm --prefix frontend run typecheck",
+    "typecheck:backend": "npm --prefix backend run typecheck",
+    "build:all": "npm --prefix backend run build && npm --prefix frontend run build"
+  }
+}

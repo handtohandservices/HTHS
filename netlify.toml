@@ -1,0 +1,11 @@
+[build]
+command = "cd frontend && npm install && npm run build"
+publish = "frontend/.next"
+
+[[plugins]]
+package = "@netlify/plugin-nextjs"
+
+[build.environment]
+# Frontend talks to the Express backend via this URL.
+# In production, set this to your deployed backend URL in the Netlify dashboard.
+NEXT_PUBLIC_API_URL = "http://localhost:4000/api"
