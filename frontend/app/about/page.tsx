@@ -64,7 +64,7 @@ export default function AboutPage() {
         {/* Corporate Overview & Heritage */}
         <section className="py-16 lg:py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
               <div>
                 <span className="text-amber-600 font-bold text-xs tracking-widest uppercase mb-2 block">
                   Who We Are
