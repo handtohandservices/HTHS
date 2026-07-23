@@ -7,22 +7,19 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-[90vh] md:min-h-screen flex items-center pt-24 sm:pt-28 pb-16 sm:pb-20 overflow-hidden"
+      className="relative min-h-[90vh] md:min-h-screen flex items-center pt-24 sm:pt-28 pb-16 sm:pb-20 overflow-hidden bg-[#0a1636]"
     >
-      {/* Background image container with smart mobile & desktop positioning */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
+      {/* Desktop background image (Hidden on mobile) */}
+      <div className="hidden md:block absolute inset-0 z-0 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/hero.png"
           alt="Hand to Hand Services security and workforce team"
-          className="w-full h-full object-cover object-[65%_center] sm:object-[80%_center] md:object-center lg:object-right transition-all duration-500"
+          className="w-full h-full object-cover md:object-center lg:object-right transition-all duration-500"
         />
-        {/* Responsive Overlay Gradient:
-            - Mobile (default): Smooth vertical gradient so text on top is 100% readable while image shows through
-            - Desktop (md+): Smooth left-to-right navy fade (dark on text side, clear on workforce side)
-        */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a1636]/90 via-[#0a1636]/75 to-[#0a1636]/95 md:bg-gradient-to-r md:from-[#0a1636] md:via-[#0a1636]/85 md:via-50% md:to-transparent"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a1636] via-transparent to-transparent opacity-80 md:opacity-40"></div>
+        {/* Desktop Overlay Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0a1636] via-[#0a1636]/85 via-50% to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a1636] via-transparent to-transparent opacity-40"></div>
       </div>
 
       {/* Decorative background glow */}
@@ -30,6 +27,17 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full">
         <div className="max-w-2xl text-left">
+
+          {/* Mobile Only: 16:9 Hero Image displayed FIRST */}
+          <div className="block md:hidden relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl border border-amber-400/30 mb-6 group">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/hero.png"
+              alt="Hand to Hand Services security and workforce team"
+              className="w-full h-full object-cover object-center rounded-2xl"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a1636]/50 via-transparent to-transparent pointer-events-none"></div>
+          </div>
 
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-amber-500/30 rounded-full px-3.5 sm:px-4 py-1.5 mb-5 sm:mb-6 max-w-full">
