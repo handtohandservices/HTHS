@@ -64,7 +64,7 @@ export default function AboutPage() {
         {/* Corporate Overview & Heritage */}
         <section className="py-16 lg:py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
               <div>
                 <span className="text-amber-600 font-bold text-xs tracking-widest uppercase mb-2 block">
                   Who We Are
@@ -91,10 +91,10 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              {/* Right Image Grid */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <div className="rounded-2xl overflow-hidden shadow-lg h-56 border border-gray-100">
+              {/* Right Image Grid - Bigger 4 boxes maintaining 4:3 image aspect ratio */}
+              <div className="grid grid-cols-2 gap-4 sm:gap-5 items-center">
+                <div className="space-y-4 sm:space-y-5">
+                  <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-xl border border-gray-100 bg-slate-100">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src="/Private_Security.jpeg"
@@ -102,17 +102,25 @@ export default function AboutPage() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="bg-[#0d1b3e] text-white p-6 rounded-2xl shadow-xl">
-                    <div className="text-3xl font-extrabold text-amber-400 mb-1">ISO 9001:2015</div>
-                    <div className="text-xs text-gray-300">Certified Quality Management System</div>
+                  <div className="bg-[#0d1b3e] text-white p-5 sm:p-7 rounded-3xl shadow-xl min-h-[140px] sm:min-h-[160px] flex flex-col justify-center">
+                    <div className="text-xl sm:text-2xl font-extrabold text-amber-400 mb-1.5 leading-tight tracking-tight">
+                      ISO 9001:2015
+                    </div>
+                    <div className="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                      Certified Quality Management System
+                    </div>
                   </div>
                 </div>
-                <div className="space-y-4 pt-6">
-                  <div className="bg-amber-500 text-white p-6 rounded-2xl shadow-xl">
-                    <div className="text-3xl font-extrabold mb-1">PSARA</div>
-                    <div className="text-xs text-amber-100">Licensed & Regulated Security Provider</div>
+                <div className="space-y-4 sm:space-y-5 pt-4 sm:pt-8">
+                  <div className="bg-amber-500 text-white p-5 sm:p-7 rounded-3xl shadow-xl min-h-[140px] sm:min-h-[160px] flex flex-col justify-center">
+                    <div className="text-2xl sm:text-3xl font-extrabold mb-1.5 leading-tight tracking-tight">
+                      PSARA
+                    </div>
+                    <div className="text-xs sm:text-sm text-amber-100 leading-relaxed">
+                      Licensed & Regulated Security Provider
+                    </div>
                   </div>
-                  <div className="rounded-2xl overflow-hidden shadow-lg h-56 border border-gray-100">
+                  <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-xl border border-gray-100 bg-slate-100">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src="/Housekeeping.jpeg"

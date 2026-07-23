@@ -149,7 +149,7 @@ export default function Navbar() {
         </ul>
 
         {/* CTA */}
-        <Link href="/contact" className="!hidden lg:!inline-flex btn-gold text-sm">
+        <Link href="/contact#contact" className="!hidden lg:!inline-flex btn-gold text-sm">
           Connect With Us
         </Link>
 
@@ -207,7 +207,7 @@ export default function Navbar() {
             )
           )}
           <Link
-            href="/contact"
+            href="/contact#contact"
             className="btn-gold mt-4 justify-center w-full"
             onClick={() => setMobileOpen(false)}
           >

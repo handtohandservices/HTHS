@@ -15,13 +15,13 @@ export default function Hero() {
         <img
           src="/hero.png"
           alt="Hand to Hand Services security and workforce team"
-          className="w-full h-full object-cover object-[75%_center] sm:object-[85%_center] md:object-center lg:object-right transition-all duration-500"
+          className="w-full h-full object-cover object-[65%_center] sm:object-[80%_center] md:object-center lg:object-right transition-all duration-500"
         />
         {/* Responsive Overlay Gradient:
             - Mobile (default): Smooth vertical gradient so text on top is 100% readable while image shows through
             - Desktop (md+): Smooth left-to-right navy fade (dark on text side, clear on workforce side)
         */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a1636]/95 via-[#0a1636]/80 to-[#0a1636]/90 md:bg-gradient-to-r md:from-[#0a1636] md:via-[#0a1636]/85 md:via-50% md:to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a1636]/90 via-[#0a1636]/75 to-[#0a1636]/95 md:bg-gradient-to-r md:from-[#0a1636] md:via-[#0a1636]/85 md:via-50% md:to-transparent"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a1636] via-transparent to-transparent opacity-80 md:opacity-40"></div>
       </div>
 
@@ -30,11 +30,11 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full">
         <div className="max-w-2xl text-left">
-          
+
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-amber-500/30 rounded-full px-3.5 sm:px-4 py-1.5 mb-5 sm:mb-6">
-            <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-            <span className="text-amber-300 text-[11px] sm:text-xs font-bold tracking-wider uppercase">
+          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-amber-500/30 rounded-full px-3.5 sm:px-4 py-1.5 mb-5 sm:mb-6 max-w-full">
+            <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse shrink-0"></span>
+            <span className="text-amber-300 text-[10px] sm:text-xs font-bold tracking-wider uppercase truncate">
               PSARA LICENSED & ISO 9001:2015 CERTIFIED
             </span>
           </div>
@@ -53,19 +53,20 @@ export default function Hero() {
             Hand to Hand Services Pvt. Ltd. delivers 100% verified security guarding, qualified staffing, housekeeping, and operational support built on integrity, discipline, and trust.
           </p>
 
-          {/* Action buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12">
+          {/* Action buttons - Side by side in one line on mobile without overflow */}
+          <div className="flex flex-row items-center gap-2 sm:gap-4 mb-8 sm:mb-12 w-full max-w-full">
             <Link
-              href="/contact"
-              className="btn-gold justify-center font-bold px-6 sm:px-7 py-3 sm:py-3.5 rounded-full inline-flex items-center gap-2 shadow-lg hover:scale-105 transition-transform text-sm sm:text-base"
+              href="/contact#contact"
+              className="btn-gold flex-1 min-w-0 justify-center font-bold !px-2.5 sm:!px-7 py-2.5 sm:py-3.5 rounded-full inline-flex items-center gap-1 sm:gap-2 shadow-lg hover:scale-105 transition-transform text-xs sm:text-base text-center"
             >
-              Connect With Us <ArrowRight size={16} />
+              <span className="truncate">Connect With Us</span>
+              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
             </Link>
             <Link
               href="/services"
-              className="btn-navy-outline justify-center !border-white/40 !text-white hover:!bg-white/10 font-bold px-6 sm:px-7 py-3 sm:py-3.5 rounded-full inline-flex items-center gap-2 text-sm sm:text-base"
+              className="btn-navy-outline flex-1 min-w-0 justify-center !border-white/40 !text-white hover:!bg-white/10 font-bold !px-2.5 sm:!px-7 py-2.5 sm:py-3.5 rounded-full inline-flex items-center gap-1 sm:gap-2 text-xs sm:text-base text-center"
             >
-              Explore Services
+              <span className="truncate">Explore Services</span>
             </Link>
           </div>
 
@@ -98,6 +99,3 @@ export default function Hero() {
     </section>
   );
 }
-
-
-

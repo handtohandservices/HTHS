@@ -54,29 +54,29 @@ export default function ContactPage() {
         </section>
 
         {/* Quick Contact Bar for Directors */}
-        <section className="py-8 bg-amber-500 text-[#070f26]">
+        <section className="py-8 bg-amber-500 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="grid sm:grid-cols-3 gap-4 text-center">
-              <div className="p-3 bg-[#070f26]/10 rounded-xl">
-                <div className="text-xs font-black uppercase text-[#070f26]/70">Director</div>
-                <div className="text-base font-extrabold">Kaleem Ullah Rizvi</div>
-                <a href="tel:9752128838" className="text-sm font-bold underline hover:opacity-80">
+              <div className="p-4 bg-[#070f26] rounded-xl text-white shadow-md border border-amber-400/20">
+                <div className="text-xs font-extrabold uppercase text-amber-400 tracking-wider">Director</div>
+                <div className="text-base font-extrabold text-white my-0.5">Kaleem Ullah Rizvi</div>
+                <a href="tel:9752128838" className="text-sm font-bold text-white underline hover:text-amber-300 transition">
                   Mobile: 9752128838
                 </a>
               </div>
 
-              <div className="p-3 bg-[#070f26]/10 rounded-xl">
-                <div className="text-xs font-black uppercase text-[#070f26]/70">Director</div>
-                <div className="text-base font-extrabold">Shabana Kaleem Rizvi</div>
-                <a href="tel:8109929029" className="text-sm font-bold underline hover:opacity-80">
+              <div className="p-4 bg-[#070f26] rounded-xl text-white shadow-md border border-amber-400/20">
+                <div className="text-xs font-extrabold uppercase text-amber-400 tracking-wider">Director</div>
+                <div className="text-base font-extrabold text-white my-0.5">Shabana Kaleem Rizvi</div>
+                <a href="tel:8109929029" className="text-sm font-bold text-white underline hover:text-amber-300 transition">
                   Mobile: 8109929029
                 </a>
               </div>
 
-              <div className="p-3 bg-[#070f26]/10 rounded-xl">
-                <div className="text-xs font-black uppercase text-[#070f26]/70">Director</div>
-                <div className="text-base font-extrabold">Ahad Ullah</div>
-                <a href="tel:7971293277" className="text-sm font-bold underline hover:opacity-80">
+              <div className="p-4 bg-[#070f26] rounded-xl text-white shadow-md border border-amber-400/20">
+                <div className="text-xs font-extrabold uppercase text-amber-400 tracking-wider">Director</div>
+                <div className="text-base font-extrabold text-white my-0.5">Ahad Ullah</div>
+                <a href="tel:7971293277" className="text-sm font-bold text-white underline hover:text-amber-300 transition">
                   Mobile: 7971293277
                 </a>
               </div>
