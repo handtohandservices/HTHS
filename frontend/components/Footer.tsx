@@ -1,14 +1,14 @@
-'use client';
-
+import Link from 'next/link';
 import { Phone, Mail, MapPin, ArrowRight, Linkedin, Facebook, Instagram } from 'lucide-react';
 
 const quickLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'About Us', href: '#about' },
-  { label: 'Our Services', href: '#services' },
-  { label: 'Why Choose Us', href: '#about' },
-  { label: 'Directors', href: '#directors' },
-  { label: 'Contact Us', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Our Services', href: '/services' },
+  { label: 'Why Choose Us', href: '/#why-choose-us' },
+  { label: 'Directors', href: '/#directors' },
+  { label: 'Contact Us', href: '/contact' },
+  { label: 'Apply / Portal', href: '/apply' },
 ];
 
 const services = [
@@ -28,9 +28,12 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-11 h-11 bg-amber-500 rounded-lg flex items-center justify-center font-black text-white text-lg shadow-lg">
-                H
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/logo.png"
+                alt="Hand to Hand Services Logo"
+                className="h-11 w-auto object-contain rounded-lg"
+              />
               <div>
                 <div className="text-white font-bold leading-tight">HAND TO HAND</div>
                 <div className="text-amber-400 text-[10px] font-semibold tracking-wider">
@@ -62,13 +65,13 @@ export default function Footer() {
             <ul className="space-y-3">
               {quickLinks.map((l) => (
                 <li key={l.label}>
-                  <a
+                  <Link
                     href={l.href}
                     className="text-sm hover:text-amber-400 transition-colors inline-flex items-center gap-2 group"
                   >
                     <ArrowRight size={14} className="text-amber-500 opacity-0 group-hover:opacity-100 -ml-6 group-hover:ml-0 transition-all" />
                     {l.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -80,9 +83,9 @@ export default function Footer() {
             <ul className="space-y-3">
               {services.map((s) => (
                 <li key={s}>
-                  <a href="#services" className="text-sm hover:text-amber-400 transition-colors">
+                  <Link href="/services" className="text-sm hover:text-amber-400 transition-colors">
                     {s}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

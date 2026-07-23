@@ -6,22 +6,10 @@ import { usePathname } from 'next/navigation';
 import { Menu, X, ChevronDown } from 'lucide-react';
 
 const navLinks = [
-  { label: 'Home', href: '/#home', type: 'anchor' as const },
-  { label: 'About', href: '/#about', type: 'anchor' as const },
-  {
-    label: 'Services',
-    href: '/#services',
-    type: 'anchor' as const,
-    children: [
-      { label: 'Security Services', href: '/#services' },
-      { label: 'Housekeeping & Cleaning', href: '/#services' },
-      { label: 'Event Organization', href: '/#services' },
-      { label: 'Training Programs', href: '/#services' },
-      { label: 'Job Consultancy', href: '/#services' },
-      { label: 'Manpower Supply', href: '/#services' },
-    ],
-  },
-  { label: 'Contact', href: '/#contact', type: 'anchor' as const },
+  { label: 'Home', href: '/', type: 'route' as const },
+  { label: 'About Us', href: '/about', type: 'route' as const },
+  { label: 'Services', href: '/services', type: 'route' as const },
+  { label: 'Contact Us', href: '/contact', type: 'route' as const },
   {
     label: 'Portal / Apply',
     href: '/apply',
@@ -81,16 +69,18 @@ export default function Navbar() {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-[#0d1b3e] shadow-xl py-2' : 'bg-[#0d1b3e]/95 backdrop-blur-md py-3'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#0d1b3e] shadow-xl py-2' : 'bg-[#0d1b3e]/95 backdrop-blur-md py-3'
+        }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 bg-amber-500 rounded-lg flex items-center justify-center font-black text-white text-lg shadow-lg group-hover:bg-amber-400 transition-colors">
-            H
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo.png"
+            alt="Hand to Hand Services Logo"
+            className="h-10 sm:h-11 w-auto object-contain rounded-lg transition-transform group-hover:scale-105"
+          />
           <div>
             <div className="text-white font-bold text-sm leading-tight">HAND TO HAND</div>
             <div className="text-amber-400 text-[10px] font-semibold tracking-wider leading-tight">
@@ -119,9 +109,8 @@ export default function Navbar() {
                   {link.label}
                   <ChevronDown
                     size={14}
-                    className={`transition-transform duration-200 ${
-                      openDropdown === link.label ? 'rotate-180' : ''
-                    }`}
+                    className={`transition-transform duration-200 ${openDropdown === link.label ? 'rotate-180' : ''
+                      }`}
                   />
                 </button>
 
@@ -160,8 +149,8 @@ export default function Navbar() {
         </ul>
 
         {/* CTA */}
-        <Link href="/#contact" className="!hidden lg:!inline-flex btn-gold text-sm">
-          Get Free Quote
+        <Link href="/contact" className="!hidden lg:!inline-flex btn-gold text-sm">
+          Connect With Us
         </Link>
 
         {/* Mobile toggle */}
@@ -190,9 +179,8 @@ export default function Navbar() {
                   {link.label}
                   <ChevronDown
                     size={16}
-                    className={`transition-transform duration-200 ${
-                      mobileSubmenu === link.label ? 'rotate-180' : ''
-                    }`}
+                    className={`transition-transform duration-200 ${mobileSubmenu === link.label ? 'rotate-180' : ''
+                      }`}
                   />
                 </button>
                 {mobileSubmenu === link.label &&
@@ -219,11 +207,11 @@ export default function Navbar() {
             )
           )}
           <Link
-            href="/#contact"
+            href="/contact"
             className="btn-gold mt-4 justify-center w-full"
             onClick={() => setMobileOpen(false)}
           >
-            Get Free Quote
+            Connect With Us
           </Link>
         </div>
       )}
