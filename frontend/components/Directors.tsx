@@ -29,7 +29,7 @@ const directors: Director[] = [
   },
   {
     name: 'Ahad Ullah',
-    phone: '7971293277',
+    phone: '7987482776',
     role: 'Director',
     initials: 'AU',
     img: '/AHAD_ULLAH.jpeg',

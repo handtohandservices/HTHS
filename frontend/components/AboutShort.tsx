@@ -77,8 +77,8 @@ export default function AboutShort() {
               <Link href="/about" className="btn-navy">
                 Learn More About Us <ArrowRight size={16} />
               </Link>
-              <Link href="/services" className="text-amber-700 font-bold text-sm hover:underline inline-flex items-center gap-1">
-                View All Services &rarr;
+              <Link href="/services/security-housekeeping" className="text-amber-700 font-bold text-sm hover:underline inline-flex items-center gap-1">
+                View Security & Housekeeping Services &rarr;
               </Link>
             </div>
           </div>

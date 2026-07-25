@@ -114,7 +114,7 @@ export default function AboutPage() {
                 <div className="space-y-4 sm:space-y-5 pt-4 sm:pt-8">
                   <div className="bg-amber-500 text-white p-5 sm:p-7 rounded-3xl shadow-xl min-h-[140px] sm:min-h-[160px] flex flex-col justify-center">
                     <div className="text-2xl sm:text-3xl font-extrabold mb-1.5 leading-tight tracking-tight">
-                      PSARA
+                      PSARA Approved
                     </div>
                     <div className="text-xs sm:text-sm text-amber-100 leading-relaxed">
                       Licensed & Regulated Security Provider

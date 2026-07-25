@@ -76,8 +76,8 @@ export default function ContactPage() {
               <div className="p-4 bg-[#070f26] rounded-xl text-white shadow-md border border-amber-400/20">
                 <div className="text-xs font-extrabold uppercase text-amber-400 tracking-wider">Director</div>
                 <div className="text-base font-extrabold text-white my-0.5">Ahad Ullah</div>
-                <a href="tel:7971293277" className="text-sm font-bold text-white underline hover:text-amber-300 transition">
-                  Mobile: 7971293277
+                <a href="tel:7987482776" className="text-sm font-bold text-white underline hover:text-amber-300 transition">
+                  Mobile: 7987482776
                 </a>
               </div>
             </div>

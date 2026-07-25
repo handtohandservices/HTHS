@@ -93,10 +93,10 @@ export default function WhyChooseUs() {
             Why Choose Us
             <span className="w-8 h-px bg-amber-500" />
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0d1b3e] mb-4 leading-tight">
-            The <span className="text-amber-500">Hand to Hand</span> Advantage
-          </h2>
 
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0d1b3e] mb-4 leading-tight">
+            Hand to Hand Private Limited
+          </h2>
         </div>
 
         {/* ── Features Grid ── */}
@@ -171,7 +171,7 @@ export default function WhyChooseUs() {
 
 
             </a>
-            <a href="#services" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border-2 border-white/30 text-white font-semibold hover:bg-white/10 transition-colors text-sm whitespace-nowrap">
+            <a href="/services/security-housekeeping" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border-2 border-white/30 text-white font-semibold hover:bg-white/10 transition-colors text-sm whitespace-nowrap">
               Explore Services →
             </a>
           </div>

@@ -33,7 +33,11 @@ export const uploadResume = upload.single('resume');
 const bodyShape = (value: unknown) => {
   const schema = z.object({
     full_name: z.string().min(1, 'Full name is required.').max(200),
-    email: z.string().email('A valid email is required.').max(200),
+    email: z
+      .string()
+      .max(200)
+      .optional()
+      .transform((v) => v ?? ''),
     phone: z.string().min(1, 'Phone is required.').max(50),
     position_applied_for: z.string().min(1, 'Position is required.').max(200),
     experience_years: z

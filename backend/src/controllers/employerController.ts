@@ -29,7 +29,11 @@ const services = [
 const createSchema = z.object({
   company_name: z.string().min(1, 'Company name is required.').max(200),
   contact_person: z.string().min(1, 'Contact person is required.').max(200),
-  email: z.string().email('A valid email is required.').max(200),
+  email: z
+    .string()
+    .max(200)
+    .optional()
+    .transform((v) => v ?? ''),
   phone: z.string().min(1, 'Phone is required.').max(50),
   services_requested: z
     .array(z.string())

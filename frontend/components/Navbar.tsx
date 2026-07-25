@@ -8,15 +8,81 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 const navLinks = [
   { label: 'Home', href: '/', type: 'route' as const },
   { label: 'About Us', href: '/about', type: 'route' as const },
-  { label: 'Services', href: '/services', type: 'route' as const },
+  {
+    label: 'Services',
+    href: '/services/security-housekeeping',
+    type: 'route' as const,
+    children: [
+      {
+        label: '1. Private Security & Guarding Services',
+        href: '/services/security-housekeeping#security',
+        subtitle: 'Page 1 • PSARA Guarding & Bouncers',
+      },
+      {
+        label: '2. Housekeeping, Cleaning & Hospitality',
+        href: '/services/security-housekeeping#housekeeping',
+        subtitle: 'Page 1 • Deep Cleaning & Janitorial',
+      },
+      {
+        label: '3. Event Security & Management',
+        href: '/services/events-cultural#events',
+        subtitle: 'Page 2 • VIP Escort & 4K Photography',
+      },
+      {
+        label: '4. Cultural Programs, Drama & Dance',
+        href: '/services/events-cultural#cultural',
+        subtitle: 'Page 2 • Stage Show & Drama Production',
+      },
+      {
+        label: '5. Skill Development, Health & AI Training',
+        href: '/services/training-empowerment#training',
+        subtitle: 'Page 3 • Fire Drills & AI Workshops',
+      },
+      {
+        label: '6. Women Empowerment & Social Initiatives',
+        href: '/services/training-empowerment#women-empowerment',
+        subtitle: 'Page 3 • Lady Guarding & CSR Placement',
+      },
+      {
+        label: '7. Job Placement & Recruitment Consultancy',
+        href: '/services/recruitment-manpower#consultancy',
+        subtitle: 'Page 4 • Executive Talent Hiring',
+      },
+      {
+        label: '8. Skilled & Unskilled Manpower Supply',
+        href: '/services/recruitment-manpower#manpower',
+        subtitle: 'Page 4 • Contract Staffing & Payroll',
+      },
+      {
+        label: '9. Tour, Travel & Transportation Services',
+        href: '/services/travel-logistics#travel',
+        subtitle: 'Page 5 • Fleet Rentals & Airport Pickups',
+      },
+      {
+        label: '10. Courier, Cargo & Logistics',
+        href: '/services/travel-logistics#cargo',
+        subtitle: 'Page 5 • Express Parcels & Heavy Freight',
+      },
+      {
+        label: '11. Government & Private Tenders',
+        href: '/services/tenders-others#tenders',
+        subtitle: 'Page 6 • Uniforms & Tender Supplies',
+      },
+      {
+        label: '12. Other Specialized Corporate Solutions',
+        href: '/services/tenders-others#others',
+        subtitle: 'Page 6 • ISO Audits & Facility Setup',
+      },
+    ],
+  },
   { label: 'Contact Us', href: '/contact', type: 'route' as const },
   {
     label: 'Portal / Apply',
     href: '/apply',
     type: 'route' as const,
     children: [
-      { label: 'Job Application (Employee)', href: '/apply?type=employee' },
-      { label: 'Service Request (Employer)', href: '/apply?type=employer' },
+      { label: 'Job Application (Employee)', href: '/apply?type=employee', subtitle: '' },
+      { label: 'Service Request (Employer)', href: '/apply?type=employer', subtitle: '' },
     ],
   },
 ];
@@ -118,15 +184,27 @@ export default function Navbar() {
                   <>
                     {/* invisible bridge so the menu doesn't close while moving the mouse down */}
                     <div className="absolute top-full left-0 w-full h-2" />
-                    <ul className="absolute top-full left-0 mt-2 w-52 bg-[#0d1b3e] border border-amber-500/20 rounded-xl shadow-2xl overflow-hidden z-50 py-1">
+                    <ul className={`absolute top-full mt-2 ${
+                      link.label === 'Services'
+                        ? 'w-[680px] -left-36 grid grid-cols-2 gap-1 p-2.5'
+                        : 'w-60 left-0 py-2 divide-y divide-white/5'
+                    } bg-[#0d1b3e] border border-amber-500/30 rounded-2xl shadow-2xl overflow-hidden z-50`}>
                       {link.children.map((child) => (
                         <li key={child.label}>
                           <Link
                             href={child.href}
-                            className="block px-4 py-2.5 text-gray-300 hover:bg-amber-500 hover:text-white text-sm transition-colors"
+                            className="block px-3 py-2 rounded-xl hover:bg-amber-500/20 hover:text-amber-300 text-gray-200 transition-colors group"
                             onClick={() => setOpenDropdown(null)}
                           >
-                            {child.label}
+                            <div className="font-semibold text-xs group-hover:text-amber-300 flex items-center justify-between">
+                              <span className="truncate">{child.label}</span>
+                              <span className="text-amber-400 opacity-0 group-hover:opacity-100 transition-opacity text-xs shrink-0 ml-1">→</span>
+                            </div>
+                            {child.subtitle && (
+                              <div className="text-[10px] text-gray-400 group-hover:text-gray-200 mt-0.5 truncate">
+                                {child.subtitle}
+                              </div>
+                            )}
                           </Link>
                         </li>
                       ))}
@@ -165,7 +243,7 @@ export default function Navbar() {
 
       {/* Mobile menu — with expandable submenus per item */}
       {mobileOpen && (
-        <div className="lg:hidden bg-[#0d1b3e] border-t border-white/10 px-4 pb-4">
+        <div className="lg:hidden bg-[#0d1b3e] border-t border-white/10 px-4 pb-4 max-h-[80vh] overflow-y-auto">
           {navLinks.map((link) =>
             link.children ? (
               <div key={link.label}>
@@ -183,17 +261,21 @@ export default function Navbar() {
                       }`}
                   />
                 </button>
-                {mobileSubmenu === link.label &&
-                  link.children.map((child) => (
-                    <Link
-                      key={child.label}
-                      href={child.href}
-                      className="block py-2.5 pl-4 text-gray-400 hover:text-amber-400 text-xs border-b border-white/5"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
+                {mobileSubmenu === link.label && (
+                  <div className="py-1 bg-white/5 rounded-xl my-1 divide-y divide-white/5">
+                    {link.children.map((child) => (
+                      <Link
+                        key={child.label}
+                        href={child.href}
+                        className="block py-2.5 px-4 text-gray-300 hover:text-amber-400 text-xs"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        <div className="font-semibold">{child.label}</div>
+                        {child.subtitle && <div className="text-[10px] text-gray-400">{child.subtitle}</div>}
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
             ) : (
               <Link

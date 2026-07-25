@@ -174,9 +174,8 @@ export default function EmployeePage() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1.5">Resume (PDF only, max 5 MB) *</label>
               <div
-                className={`relative border-2 border-dashed rounded-xl transition-colors cursor-pointer ${
-                  fileError ? 'border-red-300 bg-red-50/30' : fileName ? 'border-amber-300 bg-amber-50/30' : 'border-gray-200 hover:border-amber-300 hover:bg-amber-50/20'
-                }`}
+                className={`relative border-2 border-dashed rounded-xl transition-colors cursor-pointer ${fileError ? 'border-red-300 bg-red-50/30' : fileName ? 'border-amber-300 bg-amber-50/30' : 'border-gray-200 hover:border-amber-300 hover:bg-amber-50/20'
+                  }`}
                 onClick={() => fileInputRef.current?.click()}
               >
                 <input

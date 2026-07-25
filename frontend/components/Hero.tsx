@@ -53,7 +53,7 @@ export default function Hero() {
             <span className="text-amber-400 font-extrabold block sm:inline">
               Security & Manpower
             </span>{' '}
-            Solutions
+            Business Solutions
           </h1>
 
           {/* Responsive Subtitle */}
@@ -71,7 +71,7 @@ export default function Hero() {
               <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
             </Link>
             <Link
-              href="/services"
+              href="/services/security-housekeeping"
               className="btn-navy-outline flex-1 min-w-0 justify-center !border-white/40 !text-white hover:!bg-white/10 font-bold !px-2.5 sm:!px-7 py-2.5 sm:py-3.5 rounded-full inline-flex items-center gap-1 sm:gap-2 text-xs sm:text-base text-center"
             >
               <span className="truncate">Explore Services</span>

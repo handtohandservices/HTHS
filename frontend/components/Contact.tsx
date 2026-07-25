@@ -90,7 +90,7 @@ export default function Contact() {
                   <ul className="text-gray-200 text-sm space-y-1">
                     <li>Kaleem Ullah Rizvi – <a href="tel:9752128838" className="hover:text-amber-400">9752128838</a></li>
                     <li>Shabana Kaleem Rizvi – <a href="tel:8109929029" className="hover:text-amber-400">8109929029</a></li>
-                    <li>Ahad Ullah – <a href="tel:7971293277" className="hover:text-amber-400">7971293277</a></li>
+                    <li>Ahad Ullah – <a href="tel:7987482776" className="hover:text-amber-400">7987482776</a></li>
                   </ul>
                 </div>
               </div>

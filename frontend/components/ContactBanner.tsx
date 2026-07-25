@@ -13,7 +13,7 @@ export default function ContactBanner() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="bg-gradient-to-r from-[#0d1b3e] via-[#12234e] to-[#0d1b3e] rounded-3xl p-8 sm:p-12 border border-amber-500/20 shadow-2xl">
           <div className="grid lg:grid-cols-12 gap-8 items-center">
-            
+
             <div className="lg:col-span-8">
               <div className="inline-flex items-center gap-2 bg-amber-500/20 text-amber-300 text-xs font-semibold px-3 py-1 rounded-full mb-4">
                 <ShieldCheck size={14} className="text-amber-400" /> Need Security Guarding or Manpower?
@@ -45,8 +45,8 @@ export default function ContactBanner() {
 
                 <div className="bg-white/5 border border-white/10 rounded-xl p-3">
                   <div className="text-amber-400 font-bold text-xs uppercase mb-1">Ahad Ullah</div>
-                  <a href="tel:7971293277" className="text-white text-sm font-semibold hover:text-amber-400 transition flex items-center gap-1.5">
-                    <Phone size={14} /> 7971293277
+                  <a href="tel:7987482776" className="text-white text-sm font-semibold hover:text-amber-400 transition flex items-center gap-1.5">
+                    <Phone size={14} /> 7987482776
                   </a>
                 </div>
               </div>

@@ -4,20 +4,20 @@ import { Phone, Mail, MapPin, ArrowRight, Linkedin, Facebook, Instagram } from '
 const quickLinks = [
   { label: 'Home', href: '/' },
   { label: 'About Us', href: '/about' },
-  { label: 'Our Services', href: '/services' },
+  { label: 'Security & Housekeeping', href: '/services/security-housekeeping' },
   { label: 'Why Choose Us', href: '/#why-choose-us' },
   { label: 'Directors', href: '/#directors' },
   { label: 'Contact Us', href: '/contact' },
   { label: 'Apply / Portal', href: '/apply' },
 ];
 
-const services = [
-  'Private Security',
-  'Housekeeping & Cleaning',
-  'Event Organization',
-  'Training Programs',
-  'Job Consultancy',
-  'Courier & Cargo',
+const serviceLinks = [
+  { name: 'Private Security', href: '/services/security-housekeeping#security' },
+  { name: 'Housekeeping & Cleaning', href: '/services/security-housekeeping#housekeeping' },
+  { name: 'Event Organization', href: '/services/events-cultural#events' },
+  { name: 'Training Programs', href: '/services/training-empowerment#training' },
+  { name: 'Job Consultancy', href: '/services/recruitment-manpower#consultancy' },
+  { name: 'Courier & Cargo', href: '/services/travel-logistics#cargo' },
 ];
 
 export default function Footer() {
@@ -81,10 +81,10 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-bold mb-5 text-sm uppercase tracking-wider">Our Services</h4>
             <ul className="space-y-3">
-              {services.map((s) => (
-                <li key={s}>
-                  <Link href="/services" className="text-sm hover:text-amber-400 transition-colors">
-                    {s}
+              {serviceLinks.map((s) => (
+                <li key={s.name}>
+                  <Link href={s.href} className="text-sm hover:text-amber-400 transition-colors">
+                    {s.name}
                   </Link>
                 </li>
               ))}
@@ -104,7 +104,7 @@ export default function Footer() {
                 <span>
                   <a href="tel:9752128838" className="hover:text-amber-400 block">9752128838</a>
                   <a href="tel:8109929029" className="hover:text-amber-400 block">8109929029</a>
-                  <a href="tel:7971293277" className="hover:text-amber-400 block">7971293277</a>
+                  <a href="tel:7987482776" className="hover:text-amber-400 block">7987482776</a>
                 </span>
               </li>
               <li className="flex gap-3">

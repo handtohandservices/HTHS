@@ -118,7 +118,7 @@ function ApplyPortal() {
     const experience = String(fd.get('experience_years') || '').trim();
     const message = String(fd.get('message') || '').trim();
 
-    if (!fullName || !email || !phone || !position) {
+    if (!fullName || !phone || !position || !experience || !message) {
       setEmpError('Please fill in all required fields.');
       return;
     }
@@ -171,7 +171,7 @@ function ApplyPortal() {
     const location = String(fd.get('location') || '').trim();
     const message = String(fd.get('message') || '').trim();
 
-    if (!companyName || !contactPerson || !email || !phone) {
+    if (!companyName || !contactPerson || !phone || !personnel || !duration || !location || !message) {
       setEmprError('Please fill in all required fields.');
       return;
     }
@@ -299,23 +299,24 @@ function ApplyPortal() {
               </div>
 
               <div className="grid sm:grid-cols-2 gap-5">
-                <Field icon={<User size={18} />} label="Full Name *" name="full_name" placeholder="Your full name" />
-                <Field icon={<Mail size={18} />} label="Email *" name="email" type="email" placeholder="you@example.com" />
+                <Field icon={<User size={18} />} label="Full Name *" name="full_name" placeholder="Your full name" required={true} />
+                <Field icon={<Mail size={18} />} label="Email (optional)" name="email" type="email" placeholder="you@example.com" required={false} />
               </div>
 
               <div className="grid sm:grid-cols-2 gap-5">
-                <Field icon={<Phone size={18} />} label="Phone *" name="phone" type="tel" placeholder="Your phone number" />
-                <Field icon={<Briefcase size={18} />} label="Position Applied For *" name="position_applied_for" placeholder="e.g. Security Guard" />
+                <Field icon={<Phone size={18} />} label="Phone *" name="phone" type="tel" placeholder="Your phone number" required={true} />
+                <Field icon={<Briefcase size={18} />} label="Position Applied For *" name="position_applied_for" placeholder="e.g. Security Guard" required={true} />
               </div>
 
               <div className="grid sm:grid-cols-2 gap-5">
-                <Field icon={<Clock size={18} />} label="Experience (years)" name="experience_years" type="number" placeholder="e.g. 3" required={false} />
+                <Field icon={<Clock size={18} />} label="Experience (years) *" name="experience_years" type="number" placeholder="e.g. 3" required={true} />
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Message (optional)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Message *</label>
                   <div className="relative">
                     <MessageSquare size={18} className="absolute left-3 top-3 text-gray-400" />
                     <textarea
                       name="message"
+                      required={true}
                       rows={1}
                       placeholder="Tell us about yourself"
                       className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition text-sm resize-none"
@@ -328,9 +329,8 @@ function ApplyPortal() {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">Resume (PDF only, max 5 MB) *</label>
                 <div
-                  className={`relative border-2 border-dashed rounded-xl transition-colors cursor-pointer ${
-                    fileError ? 'border-red-300 bg-red-50/30' : fileName ? 'border-amber-300 bg-amber-50/30' : 'border-gray-200 hover:border-amber-300 hover:bg-amber-50/20'
-                  }`}
+                  className={`relative border-2 border-dashed rounded-xl transition-colors cursor-pointer ${fileError ? 'border-red-300 bg-red-50/30' : fileName ? 'border-amber-300 bg-amber-50/30' : 'border-gray-200 hover:border-amber-300 hover:bg-amber-50/20'
+                    }`}
                   onClick={() => fileInputRef.current?.click()}
                 >
                   <input
@@ -359,7 +359,7 @@ function ApplyPortal() {
                   ) : (
                     <div className="flex flex-col items-center justify-center py-8 px-4 text-center">
                       <Upload className="text-gray-400 mb-2" size={28} />
-                      <p className="text-sm text-gray-600 font-medium">Click to upload your resume</p>
+                      <p className="text-sm text-gray-600 font-medium">Click to upload your resume *</p>
                       <p className="text-xs text-gray-400 mt-1">PDF files only, up to 5 MB</p>
                     </div>
                   )}
@@ -410,15 +410,13 @@ function ApplyPortal() {
                         key={s.label}
                         type="button"
                         onClick={() => toggleService(s.label)}
-                        className={`flex items-center gap-2.5 p-3 rounded-xl border text-left transition-all ${
-                          checked
+                        className={`flex items-center gap-2.5 p-3 rounded-xl border text-left transition-all ${checked
                             ? 'border-amber-500 bg-amber-50 ring-2 ring-amber-200'
                             : 'border-gray-200 hover:border-amber-300 hover:bg-amber-50/30'
-                        }`}
+                          }`}
                       >
-                        <div className={`flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center transition-colors ${
-                          checked ? 'bg-amber-500 text-white' : 'bg-gray-100 text-gray-500'
-                        }`}>
+                        <div className={`flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center transition-colors ${checked ? 'bg-amber-500 text-white' : 'bg-gray-100 text-gray-500'
+                          }`}>
                           <s.icon size={18} />
                         </div>
                         <span className={`text-xs font-medium leading-tight ${checked ? 'text-amber-900' : 'text-gray-700'}`}>
@@ -432,27 +430,28 @@ function ApplyPortal() {
 
               {/* Company details */}
               <div className="grid sm:grid-cols-2 gap-5">
-                <Field icon={<Building2 size={18} />} label="Company Name *" name="company_name" placeholder="Your company name" />
-                <Field icon={<User size={18} />} label="Contact Person *" name="contact_person" placeholder="Your name" />
+                <Field icon={<Building2 size={18} />} label="Company Name *" name="company_name" placeholder="Your company name" required={true} />
+                <Field icon={<User size={18} />} label="Contact Person *" name="contact_person" placeholder="Your name" required={true} />
               </div>
 
               <div className="grid sm:grid-cols-2 gap-5">
-                <Field icon={<Mail size={18} />} label="Email *" name="email" type="email" placeholder="contact@company.com" />
-                <Field icon={<Phone size={18} />} label="Phone *" name="phone" type="tel" placeholder="Your phone number" />
+                <Field icon={<Mail size={18} />} label="Email (optional)" name="email" type="email" placeholder="contact@company.com" required={false} />
+                <Field icon={<Phone size={18} />} label="Phone *" name="phone" type="tel" placeholder="Your phone number" required={true} />
               </div>
 
               <div className="grid sm:grid-cols-3 gap-5">
-                <Field icon={<Users size={18} />} label="Personnel Needed" name="number_of_personnel" placeholder="e.g. 10 guards" required={false} />
-                <Field icon={<Clock size={18} />} label="Duration" name="duration" placeholder="e.g. 6 months" required={false} />
-                <Field icon={<MapPin size={18} />} label="Location" name="location" placeholder="e.g. New Delhi" required={false} />
+                <Field icon={<Users size={18} />} label="Personnel Needed *" name="number_of_personnel" placeholder="e.g. 10 guards" required={true} />
+                <Field icon={<Clock size={18} />} label="Working Duration *" name="duration" placeholder="e.g. 6 months" required={true} />
+                <Field icon={<MapPin size={18} />} label="Location *" name="location" placeholder="e.g. New Delhi" required={true} />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">Additional Details</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">Additional Details *</label>
                 <div className="relative">
                   <MessageSquare size={18} className="absolute left-3 top-3 text-gray-400" />
                   <textarea
                     name="message"
+                    required={true}
                     rows={4}
                     placeholder="Describe your requirements, specific needs, timing, etc."
                     className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition text-sm resize-none"
