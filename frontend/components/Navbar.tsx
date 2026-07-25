@@ -75,6 +75,7 @@ const navLinks = [
       },
     ],
   },
+  { label: 'Gallery', href: '/gallery', type: 'route' as const },
   { label: 'Contact Us', href: '/contact', type: 'route' as const },
   {
     label: 'Portal / Apply',

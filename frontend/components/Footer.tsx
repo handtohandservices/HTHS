@@ -5,6 +5,7 @@ const quickLinks = [
   { label: 'Home', href: '/' },
   { label: 'About Us', href: '/about' },
   { label: 'Security & Housekeeping', href: '/services/security-housekeeping' },
+  { label: 'Photo Gallery', href: '/gallery' },
   { label: 'Why Choose Us', href: '/#why-choose-us' },
   { label: 'Directors', href: '/#directors' },
   { label: 'Contact Us', href: '/contact' },
