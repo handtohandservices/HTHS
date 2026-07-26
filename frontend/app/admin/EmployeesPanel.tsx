@@ -73,8 +73,23 @@ export default function EmployeesPanel() {
     }
   };
 
+  const getLocation = (s: EmployeeApplication) => {
+    if (s.preferred_location && s.preferred_location.trim()) return s.preferred_location.trim();
+    if (s.message && s.message.includes('[Preferred Location:')) {
+      const m = s.message.match(/\[Preferred Location:\s*([^\]]+)\]/);
+      if (m && m[1]) return m[1].trim();
+    }
+    return null;
+  };
+
+  const getMessageText = (s: EmployeeApplication) => {
+    if (!s.message) return '';
+    return s.message.replace(/\[Preferred Location:\s*([^\]]+)\]\n?/, '').trim();
+  };
+
   const filtered = items.filter((s) => {
     const matchesFilter = filter === 'all' || s.status === filter;
+    const loc = getLocation(s);
     const q = search.trim().toLowerCase();
     const matchesSearch =
       !q ||
@@ -82,7 +97,7 @@ export default function EmployeesPanel() {
       s.email.toLowerCase().includes(q) ||
       s.phone.toLowerCase().includes(q) ||
       s.position_applied_for.toLowerCase().includes(q) ||
-      (s.preferred_location && s.preferred_location.toLowerCase().includes(q));
+      (loc && loc.toLowerCase().includes(q));
     return matchesFilter && matchesSearch;
   });
 
@@ -118,6 +133,7 @@ export default function EmployeesPanel() {
                 <tr className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   <th className="px-5 py-3">Applicant</th>
                   <th className="px-5 py-3">Position</th>
+                  <th className="px-5 py-3">Preferred Location</th>
                   <th className="px-5 py-3">Resume</th>
                   <th className="px-5 py-3">Status</th>
                   <th className="px-5 py-3">Date</th>
@@ -125,49 +141,72 @@ export default function EmployeesPanel() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
-                {filtered.map((s) => (
-                  <tr key={s.id} className="hover:bg-amber-50/30 transition-colors">
-                    <td className="px-5 py-4">
-                      <div className="font-semibold text-[#0d1b3e] text-sm">{s.full_name}</div>
-                      <div className="text-sm text-gray-700 flex items-center gap-1.5 mt-1"><Mail size={13} className="text-gray-400" /><a href={`mailto:${s.email}`} className="hover:text-amber-600">{s.email}</a></div>
-                      <div className="text-sm text-gray-700 flex items-center gap-1.5 mt-0.5"><Phone size={13} className="text-gray-400" /><a href={`tel:${s.phone}`} className="hover:text-amber-600">{s.phone}</a></div>
-                    </td>
-                    <td className="px-5 py-4">
-                      <div className="flex items-center gap-1.5 text-sm text-gray-700 font-medium"><Briefcase size={13} className="text-gray-400" />{s.position_applied_for}</div>
-                      {s.experience_years !== null && <div className="flex items-center gap-1.5 text-xs text-gray-400 mt-1"><Clock size={12} />{s.experience_years} yrs experience</div>}
-                      {s.preferred_location && <div className="flex items-center gap-1.5 text-xs text-amber-700 mt-0.5"><MapPin size={12} />{s.preferred_location}</div>}
-                    </td>
-                    <td className="px-5 py-4">
-                      <a href={s.resume_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-lg px-2.5 py-1.5 transition-colors">
-                        <FileText size={14} /> View PDF
-                      </a>
-                    </td>
-                    <td className="px-5 py-4"><StatusBadge status={s.status} /></td>
-                    <td className="px-5 py-4"><div className="text-sm text-gray-500">{formatDate(s.created_at)}</div><div className="text-xs text-gray-400">{formatTime(s.created_at)}</div></td>
-                    <td className="px-5 py-4"><RowActions onView={() => { setSelected(s); if (s.status === 'new') updateStatus(s.id, 'reviewed'); }} onDelete={() => remove(s.id)} deleting={actionLoading === `delete-${s.id}`} /></td>
-                  </tr>
-                ))}
+                {filtered.map((s) => {
+                  const loc = getLocation(s);
+                  return (
+                    <tr key={s.id} className="hover:bg-amber-50/30 transition-colors">
+                      <td className="px-5 py-4">
+                        <div className="font-semibold text-[#0d1b3e] text-sm">{s.full_name}</div>
+                        <div className="text-sm text-gray-700 flex items-center gap-1.5 mt-1"><Mail size={13} className="text-gray-400" /><a href={`mailto:${s.email}`} className="hover:text-amber-600">{s.email}</a></div>
+                        <div className="text-sm text-gray-700 flex items-center gap-1.5 mt-0.5"><Phone size={13} className="text-gray-400" /><a href={`tel:${s.phone}`} className="hover:text-amber-600">{s.phone}</a></div>
+                      </td>
+                      <td className="px-5 py-4">
+                        <div className="flex items-center gap-1.5 text-sm text-gray-700 font-medium"><Briefcase size={13} className="text-gray-400" />{s.position_applied_for}</div>
+                        {s.experience_years !== null && <div className="flex items-center gap-1.5 text-xs text-gray-400 mt-1"><Clock size={12} />{s.experience_years} yrs experience</div>}
+                      </td>
+                      <td className="px-5 py-4">
+                        {loc ? (
+                          <div className="flex items-center gap-1.5 text-sm text-[#0d1b3e] font-medium">
+                            <MapPin size={14} className="text-amber-600 shrink-0" />
+                            <span>{loc}</span>
+                          </div>
+                        ) : (
+                          <span className="text-xs text-gray-400">—</span>
+                        )}
+                      </td>
+                      <td className="px-5 py-4">
+                        <a href={s.resume_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-lg px-2.5 py-1.5 transition-colors">
+                          <FileText size={14} /> View PDF
+                        </a>
+                      </td>
+                      <td className="px-5 py-4"><StatusBadge status={s.status} /></td>
+                      <td className="px-5 py-4"><div className="text-sm text-gray-500">{formatDate(s.created_at)}</div><div className="text-xs text-gray-400">{formatTime(s.created_at)}</div></td>
+                      <td className="px-5 py-4"><RowActions onView={() => { setSelected(s); if (s.status === 'new') updateStatus(s.id, 'reviewed'); }} onDelete={() => remove(s.id)} deleting={actionLoading === `delete-${s.id}`} /></td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
 
             <div className="lg:hidden divide-y divide-gray-100">
-              {filtered.map((s) => (
-                <div key={s.id} className="p-4">
-                  <div className="flex items-start justify-between gap-3 mb-2">
-                    <div><div className="font-semibold text-[#0d1b3e]">{s.full_name}</div><div className="text-xs text-gray-400 mt-0.5">{formatDate(s.created_at)}</div></div>
-                    <StatusBadge status={s.status} />
+              {filtered.map((s) => {
+                const loc = getLocation(s);
+                return (
+                  <div key={s.id} className="p-4">
+                    <div className="flex items-start justify-between gap-3 mb-2">
+                      <div><div className="font-semibold text-[#0d1b3e]">{s.full_name}</div><div className="text-xs text-gray-400 mt-0.5">{formatDate(s.created_at)}</div></div>
+                      <StatusBadge status={s.status} />
+                    </div>
+                    <div className="text-sm text-gray-700 flex items-center gap-1.5 mb-1"><Briefcase size={13} className="text-gray-400" />{s.position_applied_for}</div>
+                    {loc && (
+                      <div className="text-xs text-amber-900 bg-amber-50 flex items-center gap-1.5 p-2 rounded-lg border border-amber-100 mb-2">
+                        <MapPin size={14} className="text-amber-600 shrink-0" />
+                        <div>
+                          <span className="text-[10px] uppercase font-bold text-amber-800 block leading-none mb-0.5">Preferred Location</span>
+                          <span className="font-semibold text-[#0d1b3e]">{loc}</span>
+                        </div>
+                      </div>
+                    )}
+                    <div className="text-sm text-gray-700 flex items-center gap-1.5 mb-1"><Mail size={13} className="text-gray-400" /><a href={`mailto:${s.email}`} className="hover:text-amber-600">{s.email}</a></div>
+                    <div className="text-sm text-gray-700 flex items-center gap-1.5 mb-2"><Phone size={13} className="text-gray-400" /><a href={`tel:${s.phone}`} className="hover:text-amber-600">{s.phone}</a></div>
+                    <a href={s.resume_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-lg px-2.5 py-1.5 mb-3 transition-colors"><FileText size={14} /> View Resume</a>
+                    <div className="flex gap-2">
+                      <button onClick={() => { setSelected(s); if (s.status === 'new') updateStatus(s.id, 'reviewed'); }} className="flex-1 inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-lg py-2 transition-colors"><Eye size={14} /> View</button>
+                      <button onClick={() => remove(s.id)} className="inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded-lg px-3 py-2 transition-colors"><Trash2 size={14} /></button>
+                    </div>
                   </div>
-                  <div className="text-sm text-gray-700 flex items-center gap-1.5 mb-1"><Briefcase size={13} className="text-gray-400" />{s.position_applied_for}</div>
-                  {s.preferred_location && <div className="text-xs text-amber-700 flex items-center gap-1.5 mb-1"><MapPin size={13} />{s.preferred_location}</div>}
-                  <div className="text-sm text-gray-700 flex items-center gap-1.5 mb-1"><Mail size={13} className="text-gray-400" /><a href={`mailto:${s.email}`} className="hover:text-amber-600">{s.email}</a></div>
-                  <div className="text-sm text-gray-700 flex items-center gap-1.5 mb-2"><Phone size={13} className="text-gray-400" /><a href={`tel:${s.phone}`} className="hover:text-amber-600">{s.phone}</a></div>
-                  <a href={s.resume_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-lg px-2.5 py-1.5 mb-3 transition-colors"><FileText size={14} /> View Resume</a>
-                  <div className="flex gap-2">
-                    <button onClick={() => { setSelected(s); if (s.status === 'new') updateStatus(s.id, 'reviewed'); }} className="flex-1 inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-lg py-2 transition-colors"><Eye size={14} /> View</button>
-                    <button onClick={() => remove(s.id)} className="inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded-lg px-3 py-2 transition-colors"><Trash2 size={14} /></button>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </>
         )}
@@ -191,21 +230,19 @@ export default function EmployeesPanel() {
               <div className="grid grid-cols-1 gap-3">
                 <a href={`mailto:${selected.email}`} className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 hover:bg-amber-50 transition-colors"><Mail size={18} className="text-amber-600" /><div><div className="text-xs text-gray-400">Email</div><div className="text-sm text-[#0d1b3e] font-medium break-all">{selected.email}</div></div></a>
                 <a href={`tel:${selected.phone}`} className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 hover:bg-amber-50 transition-colors"><Phone size={18} className="text-amber-600" /><div><div className="text-xs text-gray-400">Phone</div><div className="text-sm text-[#0d1b3e] font-medium">{selected.phone}</div></div></a>
-                {selected.preferred_location && (
-                  <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-50">
-                    <MapPin size={18} className="text-amber-600" />
-                    <div>
-                      <div className="text-xs text-gray-400">Preferred Location</div>
-                      <div className="text-sm text-[#0d1b3e] font-medium">{selected.preferred_location}</div>
-                    </div>
+                <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-50">
+                  <MapPin size={18} className="text-amber-600 shrink-0" />
+                  <div>
+                    <div className="text-xs text-gray-400">Preferred Location</div>
+                    <div className="text-sm text-[#0d1b3e] font-medium">{getLocation(selected) || 'Not Specified'}</div>
                   </div>
-                )}
+                </div>
                 <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-50"><Calendar size={18} className="text-amber-600" /><div><div className="text-xs text-gray-400">Submitted</div><div className="text-sm text-[#0d1b3e] font-medium">{formatDate(selected.created_at)} at {formatTime(selected.created_at)}</div></div></div>
               </div>
-              {selected.message && (
+              {getMessageText(selected) && (
                 <div>
                   <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Message</div>
-                  <div className="p-4 rounded-xl bg-[#fdf8f0] border border-amber-100 text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">{selected.message}</div>
+                  <div className="p-4 rounded-xl bg-[#fdf8f0] border border-amber-100 text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">{getMessageText(selected)}</div>
                 </div>
               )}
               <a href={selected.resume_url} target="_blank" rel="noopener noreferrer" className="flex w-full items-center justify-center gap-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold px-4 py-2.5 rounded-xl text-sm transition-colors">

@@ -17,6 +17,8 @@ export const employeeService = {
     resume_url: string;
     resume_public_id: string;
   }): Promise<string> {
+    const prefLoc = input.preferred_location?.trim() || null;
+
     let { data, error } = await supabase.rpc('create_employee_application', {
       p_full_name: input.full_name,
       p_email: input.email,
@@ -26,17 +28,21 @@ export const employeeService = {
       p_message: input.message,
       p_resume_url: input.resume_url,
       p_resume_public_id: input.resume_public_id,
-      p_preferred_location: input.preferred_location || null,
+      p_preferred_location: prefLoc,
     });
 
     if (error && (error.message?.includes('function') || error.code === 'PGRST202')) {
+      const formattedMessage = prefLoc
+        ? `[Preferred Location: ${prefLoc}]\n${input.message || ''}`.trim()
+        : input.message;
+
       const fallbackRes = await supabase.rpc('create_employee_application', {
         p_full_name: input.full_name,
         p_email: input.email,
         p_phone: input.phone,
         p_position: input.position_applied_for,
         p_experience_years: input.experience_years,
-        p_message: input.message,
+        p_message: formattedMessage,
         p_resume_url: input.resume_url,
         p_resume_public_id: input.resume_public_id,
       });
@@ -51,7 +57,26 @@ export const employeeService = {
   async list(): Promise<EmployeeApplication[]> {
     const { data, error } = await supabase.rpc('list_employee_applications');
     if (error) throw error;
-    return (data as EmployeeApplication[]) || [];
+    const items = (data as EmployeeApplication[]) || [];
+
+    return items.map((item) => {
+      let prefLoc = item.preferred_location || null;
+      let msg = item.message || '';
+
+      if (!prefLoc && msg.includes('[Preferred Location:')) {
+        const match = msg.match(/\[Preferred Location:\s*([^\]]+)\]/);
+        if (match && match[1]) {
+          prefLoc = match[1].trim();
+          msg = msg.replace(/\[Preferred Location:\s*([^\]]+)\]\n?/, '').trim();
+        }
+      }
+
+      return {
+        ...item,
+        preferred_location: prefLoc,
+        message: msg,
+      };
+    });
   },
 
   async getStats(): Promise<EmployeeApplicationStats> {
