@@ -14,14 +14,14 @@ interface Director {
 
 const directors: Director[] = [
   {
-    name: 'Kaleem Ullah Rizvi',
+    name: ' KalimUllah Rizvi',
     phone: '9752128838',
     role: 'Director',
     initials: 'KR',
     img: '/KALIM_RIZV.jpeg',
   },
   {
-    name: 'Shabana Kaleem Rizvi',
+    name: 'Shabana  KalimRizvi',
     phone: '8109929029',
     role: 'Director',
     initials: 'SR',
