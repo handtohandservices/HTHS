@@ -59,7 +59,7 @@ export default function ContactPage() {
             <div className="grid sm:grid-cols-3 gap-4 text-center">
               <div className="p-4 bg-[#070f26] rounded-xl text-white shadow-md border border-amber-400/20">
                 <div className="text-xs font-extrabold uppercase text-amber-400 tracking-wider">Director</div>
-                <div className="text-base font-extrabold text-white my-0.5"> KalimUllah Rizvi</div>
+                <div className="text-base font-extrabold text-white my-0.5"> Kalim Ullah Rizvi</div>
                 <a href="tel:9752128838" className="text-sm font-bold text-white underline hover:text-amber-300 transition">
                   Mobile: 9752128838
                 </a>
@@ -67,7 +67,7 @@ export default function ContactPage() {
 
               <div className="p-4 bg-[#070f26] rounded-xl text-white shadow-md border border-amber-400/20">
                 <div className="text-xs font-extrabold uppercase text-amber-400 tracking-wider">Director</div>
-                <div className="text-base font-extrabold text-white my-0.5">Shabana  KalimRizvi</div>
+                <div className="text-base font-extrabold text-white my-0.5">Shabana Kalim Rizvi</div>
                 <a href="tel:8109929029" className="text-sm font-bold text-white underline hover:text-amber-300 transition">
                   Mobile: 8109929029
                 </a>

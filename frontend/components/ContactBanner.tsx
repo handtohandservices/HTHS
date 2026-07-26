@@ -30,14 +30,14 @@ export default function ContactBanner() {
               {/* Direct Call Highlights */}
               <div className="grid sm:grid-cols-3 gap-4 mb-6">
                 <div className="bg-white/5 border border-white/10 rounded-xl p-3">
-                  <div className="text-amber-400 font-bold text-xs uppercase mb-1"> KalimUllah Rizvi</div>
+                  <div className="text-amber-400 font-bold text-xs uppercase mb-1"> Kalim Ullah Rizvi</div>
                   <a href="tel:9752128838" className="text-white text-sm font-semibold hover:text-amber-400 transition flex items-center gap-1.5">
                     <Phone size={14} /> 9752128838
                   </a>
                 </div>
 
                 <div className="bg-white/5 border border-white/10 rounded-xl p-3">
-                  <div className="text-amber-400 font-bold text-xs uppercase mb-1">Shabana  KalimRizvi</div>
+                  <div className="text-amber-400 font-bold text-xs uppercase mb-1">Shabana Kalim Rizvi</div>
                   <a href="tel:8109929029" className="text-white text-sm font-semibold hover:text-amber-400 transition flex items-center gap-1.5">
                     <Phone size={14} /> 8109929029
                   </a>
