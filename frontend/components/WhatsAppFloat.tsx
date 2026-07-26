@@ -17,7 +17,7 @@ export default function WhatsAppFloat() {
     };
   }, []);
 
-  const phone = '919752128838';
+  const phone = '9893160527';
   const message = encodeURIComponent(
     "Hello Hand to Hand Services Pvt. Ltd., I'd like to know more about your services."
   );

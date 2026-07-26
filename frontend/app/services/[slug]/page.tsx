@@ -135,31 +135,39 @@ const dualServicesMap: Record<string, DualServicePageData> = {
     },
   },
   'events-cultural': {
-    slug: 'events-cultural',
-    pageTitle: 'Event Security & Cultural Programs',
-    metaTitle: 'Event Security & Cultural Event Management | Hand to Hand Services Pvt. Ltd',
-    metaDesc: 'VIP bouncer protection, crowd control, stage management, 4K event photography, and cultural drama & dance event organization.',
-    heroSub: 'From VIP celebrity security and bouncers to complete stage choreography, drama performances, and cultural festival coordination.',
-    service1: {
-      id: 'events',
-      icon: Camera,
-      title: 'Event Security & Management',
-      subtitle: 'Flawless Crowd Control, VIP Security & Live Photography',
-      desc: 'Comprehensive event management solutions covering venue security, VIP escort, crowd control, stage management, professional photography, and high-definition videography for corporate & social events.',
-      features: [
-        'VIP & Celebrity Escort Protection',
-        'Bouncer Deployment & Metal Detectors',
-        'Stage & Venue Security Management',
-        'Professional Event Photography & 4K Video',
-        'Sound, Lighting & Equipment Logistics',
-        'Entry & Ticketing Gate Supervision',
-      ],
+  slug: 'events-cultural',
+  pageTitle: 'Event Management & Cultural Programs',
+  metaTitle: 'Event Management & Cultural Programs | Hand to Hand Services Pvt. Ltd',
+  metaDesc:
+    'Complete event management services for weddings, anniversaries, birthdays, corporate celebrations, cultural programs, stage shows, photography, and entertainment events.',
+  heroSub:
+    'From weddings, birthdays, and anniversaries to corporate celebrations and cultural festivals, we create memorable experiences with seamless planning, creative execution, and professional event coordination.',
+
+  service1: {
+    id: 'events',
+    icon: Camera,
+    title: 'Event Management',
+    subtitle: 'Creating Memorable Events, Seamlessly & Professionally',
+    desc:
+      'Complete event management solutions for weddings, anniversaries, birthday parties, corporate celebrations, cultural programs, and social gatherings. From event planning and stage decoration to entertainment, photography, and on-ground coordination, we handle every detail to make your special occasion truly memorable.',
+    features: [
+      'Wedding & Marriage Event Planning',
+      'Birthday Party Planning & Celebration Management',
+      'Anniversary & Family Celebration Events',
+      'Corporate Events & Office Celebrations',
+      'Cultural Programs, Dance & Drama Events',
+      'Stage Decoration & Event Setup',
+      'Sound, Lighting & Entertainment Management',
+      'Professional Event Photography & 4K Videography',
+      'Guest Coordination & Event Hospitality',
+      'Complete Event Planning & On-Ground Coordination',
+    ],
       sectors: ['Concerts & Expos', 'Corporate Galas', 'Weddings & Celebrations', 'Sports Tournaments'],
       images: [
         {
           src: '/Event_Organization.jpeg',
           alt: 'Event Security & Bouncers',
-          caption: 'VIP Escort & Bouncer Squad',
+          caption: '4K Event Coverage & Photography',
         },
         {
           src: '/e2.jpg',
@@ -169,12 +177,12 @@ const dualServicesMap: Record<string, DualServicePageData> = {
         {
           src: '/e3.jpg',
           alt: 'Stage Security & Lighting',
-          caption: 'Stage Setup & Gate Supervision',
+          caption: 'Event Planning & Management',
         },
         {
           src: '/e4.jpg',
           alt: 'Live Event Videography',
-          caption: '4K Event Coverage & Photography',
+          caption: 'Cultural Program and Social Gathering',
         },
       ],
     },
@@ -240,25 +248,25 @@ const dualServicesMap: Record<string, DualServicePageData> = {
       sectors: ['Security Agencies', 'Corporate Teams', 'Youth & Job Seekers', 'NGOs'],
       images: [
         {
-          src: '/skill1.jpeg',
-          alt: 'Skill Training Workshop Session',
-          caption: 'Structured Classroom Training',
-        },
-        {
-          src: '/skill2.jpeg',
-          alt: 'Interactive Skill Assessment',
-          caption: 'Behavioral & Etiquette Sessions',
-        },
-        {
-          src: '/skill3.jpeg',
-          alt: 'Digital & AI Literacy Workshop',
-          caption: 'Practical AI & Computer Literacy',
-        },
-        {
-          src: '/skill4.jpeg',
-          alt: 'First Aid & Health Response Training',
-          caption: 'Fire Safety & First Aid Drills',
-        },
+  src: '/skill1.jpeg',
+  alt: 'Professional skill development training workshop',
+  caption: 'Structured Classroom Training',
+},
+{
+  src: '/skill2.jpeg',
+  alt: 'Interactive employee skill assessment and behavioral training session',
+  caption: 'Behavioral & Etiquette Sessions',
+},
+{
+  src: '/skill3.jpeg',
+  alt: 'Digital skills and computer literacy training workshop',
+  caption: 'Practical AI & Computer Literacy',
+},
+{
+  src: '/skill4.jpeg',
+  alt: 'AI and digital literacy training workshop for professional development',
+  caption: 'AI & Digital Literacy Workshops',
+},
       ],
     },
     service2: {
@@ -277,26 +285,26 @@ const dualServicesMap: Record<string, DualServicePageData> = {
       ],
       sectors: ['Community Organizations', 'Educational Campuses', 'NGO Partners', 'Corporate CSR'],
       images: [
-        {
-          src: '/w1.jpg',
-          alt: 'Women Empowerment & Training',
-          caption: 'Vocational & Lady Guard Training',
-        },
-        {
-          src: '/w2.jpg',
-          alt: 'Women Professional Leadership',
-          caption: 'Corporate Front Office & Staffing',
-        },
-        {
-          src: '/w3.webp',
-          alt: 'Women Vocational Skill Building',
-          caption: 'Self-Defense & Safety Seminars',
-        },
-        {
-          src: '/w4.webp',
-          alt: 'Community Social Outreach',
-          caption: 'Equal Opportunity Community Team',
-        },
+       {
+  src: '/w1.jpg',
+  alt: 'Professional corporate front office and staffing services',
+  caption: 'Corporate Front Office & Staffing',
+},
+{
+  src: '/w2.jpg',
+  alt: 'Vocational training and career skill development for women',
+  caption: 'Vocational Training',
+},
+{
+  src: '/w3.webp',
+  alt: 'Women participating in self-defense and personal safety training',
+  caption: 'Self-Defense & Safety Seminars',
+},
+{
+  src: '/w4.webp',
+  alt: 'Community outreach program promoting equal opportunities and inclusion',
+  caption: 'Equal Opportunity Community Team',
+},
       ],
     },
   },
@@ -372,8 +380,8 @@ const dualServicesMap: Record<string, DualServicePageData> = {
         },
         {
           src: '/skill_unskill3.jpg',
-          alt: 'Warehouse Loading Personnel',
-          caption: 'Warehouse & E-Commerce Crew',
+          alt: 'Unskilled Manpower Supply',
+          caption: 'Unskilled Manpower Supply',
         },
         {
           src: '/skill_unskill4.webp',

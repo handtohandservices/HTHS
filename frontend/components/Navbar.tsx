@@ -150,9 +150,7 @@ export default function Navbar() {
           />
           <div>
             <div className="text-white font-bold text-sm leading-tight">Hand to Hand Services Pvt. Ltd</div>
-            <div className="text-amber-400 text-[10px] font-semibold tracking-wider leading-tight">
-              SERVICES PVT. LTD.
-            </div>
+
             <div className="text-gray-400 text-[9px] tracking-widest">SERVICE WITH INTEGRITY</div>
           </div>
         </Link>

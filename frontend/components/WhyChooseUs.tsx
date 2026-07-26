@@ -95,7 +95,7 @@ export default function WhyChooseUs() {
           </span>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0d1b3e] mb-4 leading-tight">
-            Hand to Hand Private Limited
+            Hand to Hand Services Pvt. Ltd
           </h2>
         </div>
 

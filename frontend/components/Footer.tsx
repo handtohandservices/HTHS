@@ -4,7 +4,7 @@ import { Phone, Mail, MapPin, ArrowRight, Linkedin, Facebook, Instagram } from '
 const quickLinks = [
   { label: 'Home', href: '/' },
   { label: 'About Us', href: '/about' },
-  { label: 'Security & Housekeeping', href: '/services/security-housekeeping' },
+  { label: 'Services', href: '/services/security-housekeeping' },
   { label: 'Photo Gallery', href: '/gallery' },
   { label: 'Why Choose Us', href: '/#why-choose-us' },
   { label: 'Directors', href: '/#directors' },
@@ -35,12 +35,9 @@ export default function Footer() {
                 alt="Hand to Hand Services Logo"
                 className="h-11 w-auto object-contain rounded-lg"
               />
-              <div>
-                <div className="text-white font-bold leading-tight">Hand to Hand Services Pvt. Ltd</div>
-                <div className="text-amber-400 text-[10px] font-semibold tracking-wider">
-                  SERVICES PVT. LTD.
-                </div>
-              </div>
+             <div className="text-white font-bold leading-tight whitespace-nowrap text-xs sm:text-sm">
+  Hand to Hand Services Pvt. Ltd
+</div>
             </div>
             <p className="text-sm leading-relaxed mb-6">
               Your trusted partner for security, manpower, and comprehensive business solutions
