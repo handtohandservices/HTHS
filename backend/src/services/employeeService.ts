@@ -12,11 +12,12 @@ export const employeeService = {
     phone: string;
     position_applied_for: string;
     experience_years: number | null;
+    preferred_location?: string | null;
     message: string | null;
     resume_url: string;
     resume_public_id: string;
   }): Promise<string> {
-    const { data, error } = await supabase.rpc('create_employee_application', {
+    let { data, error } = await supabase.rpc('create_employee_application', {
       p_full_name: input.full_name,
       p_email: input.email,
       p_phone: input.phone,
@@ -25,7 +26,24 @@ export const employeeService = {
       p_message: input.message,
       p_resume_url: input.resume_url,
       p_resume_public_id: input.resume_public_id,
+      p_preferred_location: input.preferred_location || null,
     });
+
+    if (error && (error.message?.includes('function') || error.code === 'PGRST202')) {
+      const fallbackRes = await supabase.rpc('create_employee_application', {
+        p_full_name: input.full_name,
+        p_email: input.email,
+        p_phone: input.phone,
+        p_position: input.position_applied_for,
+        p_experience_years: input.experience_years,
+        p_message: input.message,
+        p_resume_url: input.resume_url,
+        p_resume_public_id: input.resume_public_id,
+      });
+      if (fallbackRes.error) throw fallbackRes.error;
+      return fallbackRes.data as string;
+    }
+
     if (error) throw error;
     return data as string;
   },

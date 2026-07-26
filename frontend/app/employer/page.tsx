@@ -25,8 +25,12 @@ import {
   Plane,
   PackageCheck,
   Truck,
+  Briefcase,
+  ChevronDown,
+  Layers,
 } from 'lucide-react';
 import { api, ApiRequestError } from '@/lib/api';
+import { SERVICE_CATEGORIES } from '@/lib/servicesData';
 
 const serviceOptions = [
   { icon: ShieldCheck, label: 'Private Security Services' },
@@ -48,6 +52,8 @@ export default function EmployerPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [serviceCategory, setServiceCategory] = useState<string>('');
+  const [serviceType, setServiceType] = useState<string>('');
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
 
   const toggleService = (label: string) => {
@@ -66,19 +72,22 @@ export default function EmployerPage() {
     const contactPerson = String(fd.get('contact_person') || '').trim();
     const email = String(fd.get('email') || '').trim();
     const phone = String(fd.get('phone') || '').trim();
+    const cat = serviceCategory || String(fd.get('service_category') || '').trim();
+    const stype = serviceType || String(fd.get('service_type') || '').trim();
     const personnel = String(fd.get('number_of_personnel') || '').trim();
     const duration = String(fd.get('duration') || '').trim();
     const location = String(fd.get('location') || '').trim();
     const message = String(fd.get('message') || '').trim();
 
-    if (!companyName || !contactPerson || !email || !phone) {
-      setError('Please fill in all required fields.');
+    if (!companyName || !contactPerson || !email || !phone || !cat || !stype) {
+      setError('Please fill in all required fields including Service Category and Service Type.');
       return;
     }
-    if (selectedServices.length === 0) {
-      setError('Please select at least one service.');
-      return;
-    }
+
+    const combinedService = `${cat} - ${stype}`;
+    const servicesToSubmit = selectedServices.length > 0
+      ? Array.from(new Set([combinedService, ...selectedServices]))
+      : [combinedService];
 
     setSubmitting(true);
     try {
@@ -87,7 +96,9 @@ export default function EmployerPage() {
         contact_person: contactPerson,
         email,
         phone,
-        services_requested: selectedServices,
+        services_requested: servicesToSubmit,
+        service_category: cat,
+        service_type: stype,
         number_of_personnel: personnel,
         duration,
         location,
@@ -96,6 +107,8 @@ export default function EmployerPage() {
       setSubmitted(true);
       form.reset();
       setSelectedServices([]);
+      setServiceCategory('');
+      setServiceType('');
     } catch (err) {
       setError(
         err instanceof ApiRequestError && err.code !== 'network'
@@ -194,8 +207,69 @@ export default function EmployerPage() {
               <Field icon={<Phone size={18} />} label="Phone *" name="phone" type="tel" placeholder="Your phone number" />
             </div>
 
-            <div className="grid sm:grid-cols-3 gap-5">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {/* 1st Dropdown: Service Category */}
+              <div>
+                <label className="block text-sm font-semibold text-[#0d1b3e] mb-1.5">
+                  Service Category *
+                </label>
+                <div className="relative">
+                  <Briefcase size={18} className="absolute left-3 top-3.5 text-gray-400 pointer-events-none" />
+                  <select
+                    name="service_category"
+                    value={serviceCategory}
+                    onChange={(e) => {
+                      setServiceCategory(e.target.value);
+                      setServiceType('');
+                    }}
+                    required
+                    className="w-full pl-10 pr-8 py-3 rounded-xl border border-gray-200 bg-white focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition text-sm appearance-none cursor-pointer"
+                  >
+                    <option value="">Select Category</option>
+                    {Object.keys(SERVICE_CATEGORIES).map((cat) => (
+                      <option key={cat} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDown size={18} className="absolute right-3 top-3.5 text-gray-400 pointer-events-none" />
+                </div>
+              </div>
+
+              {/* 2nd Dropdown: Service Type */}
+              <div>
+                <label className="block text-sm font-semibold text-[#0d1b3e] mb-1.5">
+                  Service Type *
+                </label>
+                <div className="relative">
+                  <Layers size={18} className="absolute left-3 top-3.5 text-gray-400 pointer-events-none" />
+                  <select
+                    name="service_type"
+                    value={serviceType}
+                    onChange={(e) => setServiceType(e.target.value)}
+                    disabled={!serviceCategory}
+                    required
+                    className="w-full pl-10 pr-8 py-3 rounded-xl border border-gray-200 bg-white focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition text-sm appearance-none cursor-pointer disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  >
+                    <option value="">
+                      {serviceCategory ? 'Select Service Type' : 'Select Category First'}
+                    </option>
+                    {serviceCategory &&
+                      SERVICE_CATEGORIES[serviceCategory]?.map((type) => (
+                        <option key={type} value={type}>
+                          {type}
+                        </option>
+                      ))}
+                  </select>
+                  <ChevronDown size={18} className="absolute right-3 top-3.5 text-gray-400 pointer-events-none" />
+                </div>
+              </div>
+
+              {/* Personnel Needed */}
               <Field icon={<Users size={18} />} label="Personnel Needed" name="number_of_personnel" placeholder="e.g. 10 guards" required={false} />
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-5">
               <Field icon={<Clock size={18} />} label="Duration" name="duration" placeholder="e.g. 6 months" required={false} />
               <Field icon={<MapPin size={18} />} label="Location" name="location" placeholder="e.g. New Delhi" required={false} />
             </div>

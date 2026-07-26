@@ -48,6 +48,7 @@ const bodyShape = (value: unknown) => {
         const n = typeof v === 'number' ? v : parseInt(v, 10);
         return Number.isFinite(n) && n >= 0 ? n : null;
       }),
+    preferred_location: z.string().max(300).optional().transform((v) => v ?? null),
     message: z.string().max(5000).optional().transform((v) => v ?? null),
   });
   return schema.safeParse(value);

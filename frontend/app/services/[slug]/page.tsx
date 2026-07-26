@@ -54,7 +54,7 @@ const dualServicesMap: Record<string, DualServicePageData> = {
   'security-housekeeping': {
     slug: 'security-housekeeping',
     pageTitle: 'Private Security & Housekeeping Services',
-    metaTitle: 'Private Security & Housekeeping Services | Hand to Hand Services',
+    metaTitle: 'Private Security & Housekeeping Services | Hand to Hand Services Pvt. Ltd',
     metaDesc: 'PSARA compliant guarding services and professional corporate housekeeping, deep cleaning & facility maintenance by Hand to Hand Private Limited.',
     heroSub: 'Combining PSARA-regulated security protection with ISO-standard housekeeping & janitorial operations for total peace of mind.',
     service1: {
@@ -74,22 +74,22 @@ const dualServicesMap: Record<string, DualServicePageData> = {
       sectors: ['Corporate Towers', 'Industrial Plants', 'Residential Societies', 'Banks & Malls'],
       images: [
         {
-          src: '/Private_Security.jpeg',
+          src: '/s2.jpeg',
           alt: 'Private Security Personnel On Duty',
           caption: 'Trained & Vetted Security Officers',
         },
         {
-          src: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80',
+          src: '/s3.jpeg',
           alt: 'CCTV Control Room Monitoring',
           caption: '24/7 Surveillance & Control Room',
         },
         {
-          src: 'https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&w=800&q=80',
+          src: '/s1.jpeg',
           alt: 'Corporate Office Access Control',
           caption: 'Visitor & Gate Access Management',
         },
         {
-          src: 'https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?auto=format&fit=crop&w=800&q=80',
+          src: '/s4.jpeg',
           alt: 'Industrial Site Perimeter Guarding',
           caption: 'Industrial & Factory Protection',
         },
@@ -112,22 +112,22 @@ const dualServicesMap: Record<string, DualServicePageData> = {
       sectors: ['IT Parks', 'Hotels & Restaurants', 'Hospitals & Clinics', 'Educational Institutes'],
       images: [
         {
-          src: '/Housekeeping.jpeg',
+          src: '/h1.jpg',
           alt: 'Professional Housekeeping Staff',
           caption: 'Certified Cleaning & Janitorial Crew',
         },
         {
-          src: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80',
+          src: '/h3.jpg',
           alt: 'Corporate Office Sanitization',
           caption: 'Daily Sanitization & Office Care',
         },
         {
-          src: 'https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?auto=format&fit=crop&w=800&q=80',
+          src: '/h2.jpg',
           alt: 'Floor Scrubbing & Polishing',
           caption: 'Industrial Floor Machine Cleaning',
         },
         {
-          src: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80',
+          src: '/h4.jpg',
           alt: 'Washroom & Facility Hygiene Maintenance',
           caption: 'Hospitality & Pantry Operations',
         },
@@ -137,7 +137,7 @@ const dualServicesMap: Record<string, DualServicePageData> = {
   'events-cultural': {
     slug: 'events-cultural',
     pageTitle: 'Event Security & Cultural Programs',
-    metaTitle: 'Event Security & Cultural Event Management | Hand to Hand Services',
+    metaTitle: 'Event Security & Cultural Event Management | Hand to Hand Services Pvt. Ltd',
     metaDesc: 'VIP bouncer protection, crowd control, stage management, 4K event photography, and cultural drama & dance event organization.',
     heroSub: 'From VIP celebrity security and bouncers to complete stage choreography, drama performances, and cultural festival coordination.',
     service1: {
@@ -162,17 +162,17 @@ const dualServicesMap: Record<string, DualServicePageData> = {
           caption: 'VIP Escort & Bouncer Squad',
         },
         {
-          src: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80',
+          src: '/e2.jpg',
           alt: 'Live Event Crowd Control',
           caption: 'Concert & Expo Crowd Management',
         },
         {
-          src: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80',
+          src: '/e3.jpg',
           alt: 'Stage Security & Lighting',
           caption: 'Stage Setup & Gate Supervision',
         },
         {
-          src: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=80',
+          src: '/e4.jpg',
           alt: 'Live Event Videography',
           caption: '4K Event Coverage & Photography',
         },
@@ -195,22 +195,22 @@ const dualServicesMap: Record<string, DualServicePageData> = {
       sectors: ['Cultural Associations', 'Schools & Colleges', 'Government Festivals', 'Corporate Anniversaries'],
       images: [
         {
-          src: '/Cultural_Programs.jpeg',
+          src: '/c1.jpg',
           alt: 'Cultural Stage Performance',
           caption: 'Traditional Dance & Drama Shows',
         },
         {
-          src: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=800&q=80',
+          src: '/c2.jpg',
           alt: 'Stage Dance Production',
           caption: 'Choreography & Artist Booking',
         },
         {
-          src: 'https://images.unsplash.com/photo-1469488865564-c2de10f69f96?auto=format&fit=crop&w=800&q=80',
+          src: '/c3.jpg',
           alt: 'Cultural Festival Celebration',
           caption: 'Public & Corporate Festivals',
         },
         {
-          src: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80',
+          src: '/c4.webp',
           alt: 'Drama & Theater Lights',
           caption: 'Sound & High-Tech Stage Lighting',
         },
@@ -220,7 +220,7 @@ const dualServicesMap: Record<string, DualServicePageData> = {
   'training-empowerment': {
     slug: 'training-empowerment',
     pageTitle: 'Skill Training & Women Empowerment',
-    metaTitle: 'Skill Training & Women Empowerment Initiatives | Hand to Hand Services',
+    metaTitle: 'Skill Training & Women Empowerment Initiatives | Hand to Hand Services Pvt. Ltd',
     metaDesc: 'PSARA guard training, first aid & AI workshops paired with dedicated women empowerment & lady security guard placement programs.',
     heroSub: 'Building capabilities through certified skill development workshops, digital literacy, and dedicated employment initiatives for women.',
     service1: {
@@ -240,22 +240,22 @@ const dualServicesMap: Record<string, DualServicePageData> = {
       sectors: ['Security Agencies', 'Corporate Teams', 'Youth & Job Seekers', 'NGOs'],
       images: [
         {
-          src: '/Health_Education.jpeg',
+          src: '/skill1.jpeg',
           alt: 'Skill Training Workshop Session',
           caption: 'Structured Classroom Training',
         },
         {
-          src: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80',
+          src: '/skill2.jpeg',
           alt: 'Interactive Skill Assessment',
           caption: 'Behavioral & Etiquette Sessions',
         },
         {
-          src: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80',
+          src: '/skill3.jpeg',
           alt: 'Digital & AI Literacy Workshop',
           caption: 'Practical AI & Computer Literacy',
         },
         {
-          src: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80',
+          src: '/skill4.jpeg',
           alt: 'First Aid & Health Response Training',
           caption: 'Fire Safety & First Aid Drills',
         },
@@ -278,22 +278,22 @@ const dualServicesMap: Record<string, DualServicePageData> = {
       sectors: ['Community Organizations', 'Educational Campuses', 'NGO Partners', 'Corporate CSR'],
       images: [
         {
-          src: '/Women_Empowerment.jpeg',
+          src: '/w1.jpg',
           alt: 'Women Empowerment & Training',
           caption: 'Vocational & Lady Guard Training',
         },
         {
-          src: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
+          src: '/w2.jpg',
           alt: 'Women Professional Leadership',
           caption: 'Corporate Front Office & Staffing',
         },
         {
-          src: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80',
+          src: '/w3.webp',
           alt: 'Women Vocational Skill Building',
           caption: 'Self-Defense & Safety Seminars',
         },
         {
-          src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80',
+          src: '/w4.webp',
           alt: 'Community Social Outreach',
           caption: 'Equal Opportunity Community Team',
         },
@@ -303,7 +303,7 @@ const dualServicesMap: Record<string, DualServicePageData> = {
   'recruitment-manpower': {
     slug: 'recruitment-manpower',
     pageTitle: 'Job Placement & Manpower Supply',
-    metaTitle: 'Job Placement & Manpower Supply | Hand to Hand Services',
+    metaTitle: 'Job Placement & Manpower Supply | Hand to Hand Services Pvt. Ltd',
     metaDesc: 'Executive recruitment consultancy and vetted contractual skilled & unskilled manpower supply for corporate, industrial, and logistics sectors.',
     heroSub: 'Connecting top talent with leading enterprises and providing background-verified contractual staffing across all industry domains.',
     service1: {
@@ -323,17 +323,17 @@ const dualServicesMap: Record<string, DualServicePageData> = {
       sectors: ['Corporate Companies', 'SMEs', 'Retail Chains', 'Healthcare & Facilities'],
       images: [
         {
-          src: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
+          src: '/j1.jpg',
           alt: 'Job Interview & Executive Recruitment',
           caption: 'Executive Candidate Screening',
         },
         {
-          src: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80',
+          src: '/j2.jpg',
           alt: 'Corporate Handshake & Placement',
           caption: 'Successful Placement Agreements',
         },
         {
-          src: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80',
+          src: '/j3.jpg',
           alt: 'Recruitment Consultation',
           caption: 'Contract-to-Hire & Bulk Hiring',
         },
@@ -361,22 +361,22 @@ const dualServicesMap: Record<string, DualServicePageData> = {
       sectors: ['Logistics Hubs', 'E-Commerce Warehouses', 'Corporate Offices', 'Government Offices'],
       images: [
         {
-          src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80',
+          src: '/skill_unskill1.jpg',
           alt: 'Industrial Skilled Factory Workers',
           caption: 'Factory & Industrial Staffing',
         },
         {
-          src: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
+          src: '/skill_unskill2.jpg',
           alt: 'Technical & Electrical Staff',
           caption: 'Skilled Technicians & Electricians',
         },
         {
-          src: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80',
+          src: '/skill_unskill3.jpg',
           alt: 'Warehouse Loading Personnel',
           caption: 'Warehouse & E-Commerce Crew',
         },
         {
-          src: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80',
+          src: '/skill_unskill4.webp',
           alt: 'On-Site Operations Staff',
           caption: 'Compliant Flexi-Staffing Supply',
         },
@@ -386,7 +386,7 @@ const dualServicesMap: Record<string, DualServicePageData> = {
   'travel-logistics': {
     slug: 'travel-logistics',
     pageTitle: 'Tour Travel & Courier Logistics',
-    metaTitle: 'Tour Travel & Express Courier Logistics | Hand to Hand Services',
+    metaTitle: 'Tour Travel & Express Courier Logistics | Hand to Hand Services Pvt. Ltd',
     metaDesc: 'Corporate fleet rentals, luxury travel coach bookings paired with swift express courier delivery and cargo logistics services.',
     heroSub: 'Providing seamless corporate fleet rentals and group tour management together with trusted express courier & heavy cargo logistics.',
     service1: {
@@ -406,22 +406,22 @@ const dualServicesMap: Record<string, DualServicePageData> = {
       sectors: ['Corporate Delegations', 'Educational Tours', 'Event Organizers', 'Family & Group Trips'],
       images: [
         {
-          src: '/Tour_Travel.jpeg',
+          src: '/t4.jpeg',
           alt: 'Tour & Travel Services',
           caption: 'Luxury Fleet & Group Travel',
         },
         {
-          src: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80',
+          src: '/t1.jpg',
           alt: 'Luxury Bus & Tourist Coach',
           caption: 'Commercial Cabs & Bus Rentals',
         },
         {
-          src: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80',
+          src: '/t2.jpeg',
           alt: 'Corporate Airport Transfer',
           caption: '24/7 Airport & Delegation Pickups',
         },
         {
-          src: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80',
+          src: '/t3.jpeg',
           alt: 'Scenic Domestic Tour Trip',
           caption: 'Customized Domestic Tour Packages',
         },
@@ -444,22 +444,22 @@ const dualServicesMap: Record<string, DualServicePageData> = {
       sectors: ['Legal & Financial Firms', 'E-Commerce Brands', 'Corporate Offices', 'Retail Chains'],
       images: [
         {
-          src: '/Courier_Cargo.jpeg',
+          src: '/cc1.jpg',
           alt: 'Courier & Cargo Logistics',
           caption: 'Express Courier & Parcel Transport',
         },
         {
-          src: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80',
+          src: '/cc2.png',
           alt: 'Cargo Logistics Truck Fleet',
           caption: 'Heavy Freight & Bulk Cargo',
         },
         {
-          src: 'https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?auto=format&fit=crop&w=800&q=80',
+          src: '/cc3.jpg',
           alt: 'Document Express Courier',
           caption: 'Confidential Files & Document Delivery',
         },
         {
-          src: 'https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=800&q=80',
+          src: '/cc4.webp',
           alt: 'Logistics Warehouse Supply Chain',
           caption: 'Real-Time Tracked Supply Chain',
         },
@@ -469,7 +469,7 @@ const dualServicesMap: Record<string, DualServicePageData> = {
   'tenders-others': {
     slug: 'tenders-others',
     pageTitle: 'Government Tenders & Corporate Supplies',
-    metaTitle: 'Government Tenders & Corporate Supplies | Hand to Hand Services',
+    metaTitle: 'Government Tenders & Corporate Supplies | Hand to Hand Services Pvt. Ltd',
     metaDesc: 'Public and private tender procurement, safety gear, uniforms, and specialized corporate infrastructure solutions.',
     heroSub: 'Your dependable procurement partner for government and private tenders, safety equipment, uniforms, and custom corporate solutions.',
     service1: {
@@ -555,7 +555,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const pageData = dualServicesMap[slug];
   if (!pageData) {
-    return { title: 'Service Not Found | Hand to Hand Services' };
+    return { title: 'Service Not Found | Hand to Hand Services Pvt. Ltd' };
   }
   return {
     title: pageData.metaTitle,
@@ -630,7 +630,7 @@ export default async function DualServicePage({ params }: { params: Promise<{ sl
         {/* Main Content Area: 2 Services */}
         <section className="py-12 lg:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-20">
-            
+
             {/* ── SERVICE 1 BLOCK ── */}
             <div
               id={service1.id}
@@ -656,10 +656,7 @@ export default async function DualServicePage({ params }: { params: Promise<{ sl
 
               {/* 4 Image Collage Component for Service 1 */}
               <div className="mb-10">
-                <h3 className="text-xs font-extrabold uppercase tracking-widest text-[#0d1b3e] mb-3 flex items-center gap-2">
-                  <CheckCircle size={14} className="text-amber-500" />
-                  Service Visual Gallery (4 Photo Collage)
-                </h3>
+
                 <ServiceCollage images={service1.images} />
               </div>
 
@@ -724,10 +721,6 @@ export default async function DualServicePage({ params }: { params: Promise<{ sl
 
               {/* 4 Image Collage Component for Service 2 */}
               <div className="mb-10">
-                <h3 className="text-xs font-extrabold uppercase tracking-widest text-[#0d1b3e] mb-3 flex items-center gap-2">
-                  <CheckCircle size={14} className="text-amber-500" />
-                  Service Visual Gallery (4 Photo Collage)
-                </h3>
                 <ServiceCollage images={service2.images} />
               </div>
 

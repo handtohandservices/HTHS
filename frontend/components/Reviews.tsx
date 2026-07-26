@@ -43,7 +43,7 @@ const reviews: Review[] = [
     rating: 5,
     date: '1 month ago',
     comment:
-      'Finding skilled and background-verified support staff used to be a major challenge for us. Hand to Hand stepped in with a tailored staffing model that seamlessly fulfilled all our requirements within 48 hours.',
+      'Finding skilled and background-verified support staff used to be a major challenge for us. Hand to Hand Services Pvt. Ltd stepped in with a tailored staffing model that seamlessly fulfilled all our requirements within 48 hours.',
     highlight: 'Rapid 48hr Deployment & Vetted Staff',
   },
   {
@@ -73,7 +73,7 @@ const reviews: Review[] = [
     rating: 5,
     date: '2 months ago',
     comment:
-      'Zero compliance hiccups and total transparency in billing. The team leadership at Hand to Hand is always accessible and addresses feedback instantly. We are thoroughly impressed with their partnership.',
+      'Zero compliance hiccups and total transparency in billing. The team leadership at Hand to Hand Services Pvt. Ltd is always accessible and addresses feedback instantly. We are thoroughly impressed with their partnership.',
     highlight: '100% Compliance & Transparent Billing',
   },
   {

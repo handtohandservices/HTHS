@@ -57,7 +57,7 @@ export default function AdminDashboard() {
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-amber-500 rounded-lg flex items-center justify-center font-black text-white text-lg shadow-lg">H</div>
             <div>
-              <div className="font-bold text-sm leading-tight">HAND TO HAND</div>
+              <div className="font-bold text-sm leading-tight">Hand to Hand Services Pvt. Ltd.</div>
               <div className="text-amber-400 text-[10px] font-semibold tracking-wider">ADMIN PANEL</div>
             </div>
           </div>
@@ -71,9 +71,8 @@ export default function AdminDashboard() {
             <button
               key={t.id}
               onClick={() => setActiveTab(t.id)}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
-                activeTab === t.id ? 'bg-amber-500/15 text-amber-400 font-semibold' : 'text-gray-400 hover:text-white hover:bg-white/5'
-              }`}
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${activeTab === t.id ? 'bg-amber-500/15 text-amber-400 font-semibold' : 'text-gray-400 hover:text-white hover:bg-white/5'
+                }`}
             >
               <t.icon size={18} /> {t.label}
             </button>
@@ -118,9 +117,8 @@ export default function AdminDashboard() {
               <button
                 key={t.id}
                 onClick={() => setActiveTab(t.id)}
-                className={`flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
-                  activeTab === t.id ? 'bg-amber-500 text-white' : 'bg-gray-100 text-gray-600'
-                }`}
+                className={`flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${activeTab === t.id ? 'bg-amber-500 text-white' : 'bg-gray-100 text-gray-600'
+                  }`}
               >
                 <t.icon size={14} /> {t.label}
               </button>
@@ -135,9 +133,8 @@ export default function AdminDashboard() {
               <button
                 key={t.id}
                 onClick={() => setActiveTab(t.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
-                  activeTab === t.id ? 'bg-white text-[#0d1b3e] shadow-sm' : 'text-gray-500 hover:text-gray-700'
-                }`}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${activeTab === t.id ? 'bg-white text-[#0d1b3e] shadow-sm' : 'text-gray-500 hover:text-gray-700'
+                  }`}
               >
                 <t.icon size={16} /> {t.label}
               </button>

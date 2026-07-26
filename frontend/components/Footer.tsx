@@ -36,7 +36,7 @@ export default function Footer() {
                 className="h-11 w-auto object-contain rounded-lg"
               />
               <div>
-                <div className="text-white font-bold leading-tight">HAND TO HAND</div>
+                <div className="text-white font-bold leading-tight">Hand to Hand Services Pvt. Ltd</div>
                 <div className="text-amber-400 text-[10px] font-semibold tracking-wider">
                   SERVICES PVT. LTD.
                 </div>

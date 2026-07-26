@@ -51,7 +51,7 @@ export default function ServiceCollage({ images }: { images: CollageImage[] }) {
           <div className="w-full h-full bg-gradient-to-br from-[#0d1b3e] to-slate-800 p-4 flex flex-col items-center justify-center text-center text-white">
             <ImageIcon size={isHero ? 36 : 24} className="text-amber-400 mb-2 opacity-80" />
             <p className="text-xs font-bold text-amber-300 mb-1">{img.caption}</p>
-            <span className="text-[10px] text-gray-400">Hand to Hand Certified Service</span>
+            <span className="text-[10px] text-gray-400">Hand to Hand Services Pvt. Ltd Certified Service</span>
           </div>
         )}
 

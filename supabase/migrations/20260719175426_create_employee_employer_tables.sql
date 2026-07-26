@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS employee_applications (
   phone text NOT NULL,
   position_applied_for text NOT NULL,
   experience_years integer,
+  preferred_location text,
   message text,
   resume_url text NOT NULL,
   resume_public_id text,
@@ -45,6 +46,8 @@ CREATE TABLE IF NOT EXISTS employer_requests (
   email text NOT NULL,
   phone text NOT NULL,
   services_requested text[] NOT NULL DEFAULT '{}',
+  service_category text,
+  service_type text,
   number_of_personnel text,
   duration text,
   location text,
@@ -76,7 +79,8 @@ CREATE OR REPLACE FUNCTION create_employee_application(
   p_experience_years integer,
   p_message text,
   p_resume_url text,
-  p_resume_public_id text
+  p_resume_public_id text,
+  p_preferred_location text DEFAULT NULL
 )
 RETURNS uuid
 LANGUAGE plpgsql
@@ -87,9 +91,9 @@ DECLARE
   v_id uuid;
 BEGIN
   INSERT INTO employee_applications
-    (full_name, email, phone, position_applied_for, experience_years, message, resume_url, resume_public_id)
+    (full_name, email, phone, position_applied_for, experience_years, message, resume_url, resume_public_id, preferred_location)
   VALUES
-    (p_full_name, p_email, p_phone, p_position, p_experience_years, p_message, p_resume_url, p_resume_public_id)
+    (p_full_name, p_email, p_phone, p_position, p_experience_years, p_message, p_resume_url, p_resume_public_id, p_preferred_location)
   RETURNING id INTO v_id;
   RETURN v_id;
 END;
@@ -176,7 +180,9 @@ CREATE OR REPLACE FUNCTION create_employer_request(
   p_number_of_personnel text,
   p_duration text,
   p_location text,
-  p_message text
+  p_message text,
+  p_service_category text DEFAULT NULL,
+  p_service_type text DEFAULT NULL
 )
 RETURNS uuid
 LANGUAGE plpgsql
@@ -186,9 +192,9 @@ AS $$
 DECLARE v_id uuid;
 BEGIN
   INSERT INTO employer_requests
-    (company_name, contact_person, email, phone, services_requested, number_of_personnel, duration, location, message)
+    (company_name, contact_person, email, phone, services_requested, number_of_personnel, duration, location, message, service_category, service_type)
   VALUES
-    (p_company_name, p_contact_person, p_email, p_phone, p_services, p_number_of_personnel, p_duration, p_location, p_message)
+    (p_company_name, p_contact_person, p_email, p_phone, p_services, p_number_of_personnel, p_duration, p_location, p_message, p_service_category, p_service_type)
   RETURNING id INTO v_id;
   RETURN v_id;
 END;

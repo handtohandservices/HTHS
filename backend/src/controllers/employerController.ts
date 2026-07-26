@@ -37,7 +37,10 @@ const createSchema = z.object({
   phone: z.string().min(1, 'Phone is required.').max(50),
   services_requested: z
     .array(z.string())
-    .min(1, 'Select at least one service.'),
+    .optional()
+    .transform((v) => v ?? []),
+  service_category: z.string().max(200).optional().transform((v) => v ?? null),
+  service_type: z.string().max(200).optional().transform((v) => v ?? null),
   number_of_personnel: z.string().max(100).optional().transform((v) => v ?? null),
   duration: z.string().max(200).optional().transform((v) => v ?? null),
   location: z.string().max(300).optional().transform((v) => v ?? null),

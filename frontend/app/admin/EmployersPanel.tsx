@@ -17,9 +17,14 @@ import {
   Clock,
   MapPin,
   CheckCircle2,
+  Briefcase,
+  ChevronDown,
+  Search,
+  Filter as FilterIcon,
 } from 'lucide-react';
 import { StatCard, StatusBadge, formatDate, formatTime } from './_shared';
-import { Toolbar, EmptyState, RowActions, StatusControls } from './ContactsPanel';
+import { EmptyState, RowActions, StatusControls } from './ContactsPanel';
+import { SERVICE_CATEGORIES } from '@/lib/servicesData';
 
 type Filter = 'all' | 'new' | 'reviewed' | 'archived';
 
@@ -29,6 +34,7 @@ export default function EmployersPanel() {
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState<Filter>('all');
+  const [categoryFilter, setCategoryFilter] = useState<string>('all');
   const [selected, setSelected] = useState<EmployerRequest | null>(null);
   const [actionLoading, setActionLoading] = useState<string | null>(null);
 
@@ -76,9 +82,26 @@ export default function EmployersPanel() {
 
   const filtered = items.filter((s) => {
     const matchesFilter = filter === 'all' || s.status === filter;
+    const matchesCategory =
+      categoryFilter === 'all' ||
+      s.service_category === categoryFilter ||
+      (!s.service_category &&
+        s.services_requested.some((svc) =>
+          svc.toLowerCase().includes(categoryFilter.toLowerCase())
+        ));
+
     const q = search.trim().toLowerCase();
-    const matchesSearch = !q || s.company_name.toLowerCase().includes(q) || s.contact_person.toLowerCase().includes(q) || s.email.toLowerCase().includes(q) || s.phone.toLowerCase().includes(q) || s.services_requested.join(' ').toLowerCase().includes(q);
-    return matchesFilter && matchesSearch;
+    const matchesSearch =
+      !q ||
+      s.company_name.toLowerCase().includes(q) ||
+      s.contact_person.toLowerCase().includes(q) ||
+      s.email.toLowerCase().includes(q) ||
+      s.phone.toLowerCase().includes(q) ||
+      s.services_requested.join(' ').toLowerCase().includes(q) ||
+      (s.service_category && s.service_category.toLowerCase().includes(q)) ||
+      (s.service_type && s.service_type.toLowerCase().includes(q));
+
+    return matchesFilter && matchesCategory && matchesSearch;
   });
 
   const counts = {
@@ -99,7 +122,55 @@ export default function EmployersPanel() {
         <StatCard label="Archived" value={counts.archived} color="gray" />
       </div>
 
-      <Toolbar search={search} setSearch={setSearch} filter={filter} setFilter={setFilter} filters={['all', 'new', 'reviewed', 'archived']} />
+      {/* Toolbar with Search, Service Category Filter, and Status Filter */}
+      <div className="bg-white rounded-2xl border border-gray-200 p-4 mb-4 flex flex-col md:flex-row gap-3 md:items-center justify-between">
+        <div className="flex flex-col sm:flex-row gap-3 flex-1">
+          {/* Search input */}
+          <div className="relative flex-1 min-w-[200px]">
+            <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search company, contact, email, service..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition text-sm"
+            />
+          </div>
+
+          {/* Service Category Filter Dropdown */}
+          <div className="relative min-w-[220px]">
+            <Briefcase size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-amber-600 pointer-events-none" />
+            <select
+              value={categoryFilter}
+              onChange={(e) => setCategoryFilter(e.target.value)}
+              className="w-full pl-9 pr-8 py-2.5 rounded-lg border border-amber-200 bg-amber-50/60 hover:bg-amber-50 focus:bg-white focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition text-xs font-semibold text-[#0d1b3e] appearance-none cursor-pointer"
+            >
+              <option value="all">All Service Categories</option>
+              {Object.keys(SERVICE_CATEGORIES).map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              ))}
+            </select>
+            <ChevronDown size={16} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+          </div>
+        </div>
+
+        {/* Status filters */}
+        <div className="flex gap-1.5 bg-gray-100 rounded-lg p-1 shrink-0 self-start md:self-auto">
+          {(['all', 'new', 'reviewed', 'archived'] as Filter[]).map((f) => (
+            <button
+              key={f}
+              onClick={() => setFilter(f)}
+              className={`px-3 py-1.5 rounded-md text-xs font-semibold capitalize transition-colors ${
+                filter === f ? 'bg-white text-[#0d1b3e] shadow-sm' : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+      </div>
 
       <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
         {fetching ? (
@@ -128,9 +199,19 @@ export default function EmployersPanel() {
                       <div className="text-sm text-gray-700 flex items-center gap-1.5 mt-0.5"><Phone size={13} className="text-gray-400" /><a href={`tel:${s.phone}`} className="hover:text-amber-600">{s.phone}</a></div>
                     </td>
                     <td className="px-5 py-4 max-w-xs">
+                      {s.service_category && (
+                        <div className="text-xs font-semibold text-[#0d1b3e] mb-1">
+                          {s.service_category}
+                        </div>
+                      )}
+                      {s.service_type && (
+                        <div className="text-xs text-amber-700 font-medium mb-1.5 bg-amber-50 px-2 py-0.5 rounded border border-amber-100 inline-block">
+                          {s.service_type}
+                        </div>
+                      )}
                       <div className="flex flex-wrap gap-1">
                         {s.services_requested.slice(0, 3).map((svc) => (
-                          <span key={svc} className="inline-block text-[11px] bg-amber-50 text-amber-800 px-2 py-0.5 rounded-full">{svc}</span>
+                          <span key={svc} className="inline-block text-[11px] bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full">{svc}</span>
                         ))}
                         {s.services_requested.length > 3 && <span className="text-[11px] text-gray-400">+{s.services_requested.length - 3} more</span>}
                       </div>
@@ -150,6 +231,12 @@ export default function EmployersPanel() {
                     <div><div className="font-semibold text-[#0d1b3e]">{s.company_name}</div><div className="text-xs text-gray-400 mt-0.5">{formatDate(s.created_at)}</div></div>
                     <StatusBadge status={s.status} />
                   </div>
+                  {(s.service_category || s.service_type) && (
+                    <div className="mb-2 text-xs bg-amber-50/80 p-2 rounded-lg border border-amber-100">
+                      {s.service_category && <div className="font-semibold text-amber-900">{s.service_category}</div>}
+                      {s.service_type && <div className="text-amber-700 font-medium">{s.service_type}</div>}
+                    </div>
+                  )}
                   <div className="flex flex-wrap gap-1 mb-2">
                     {s.services_requested.slice(0, 3).map((svc) => (
                       <span key={svc} className="inline-block text-[11px] bg-amber-50 text-amber-800 px-2 py-0.5 rounded-full">{svc}</span>
@@ -186,6 +273,18 @@ export default function EmployersPanel() {
                 <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-50"><User size={18} className="text-amber-600" /><div><div className="text-xs text-gray-400">Contact Person</div><div className="text-sm text-[#0d1b3e] font-medium">{selected.contact_person}</div></div></div>
                 <a href={`mailto:${selected.email}`} className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 hover:bg-amber-50 transition-colors"><Mail size={18} className="text-amber-600" /><div><div className="text-xs text-gray-400">Email</div><div className="text-sm text-[#0d1b3e] font-medium break-all">{selected.email}</div></div></a>
                 <a href={`tel:${selected.phone}`} className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 hover:bg-amber-50 transition-colors"><Phone size={18} className="text-amber-600" /><div><div className="text-xs text-gray-400">Phone</div><div className="text-sm text-[#0d1b3e] font-medium">{selected.phone}</div></div></a>
+                {selected.service_category && (
+                  <div className="p-3 rounded-xl bg-amber-50 border border-amber-200/60">
+                    <div className="text-xs text-amber-700 font-semibold uppercase tracking-wider">Service Category</div>
+                    <div className="text-sm text-[#0d1b3e] font-bold mt-0.5">{selected.service_category}</div>
+                  </div>
+                )}
+                {selected.service_type && (
+                  <div className="p-3 rounded-xl bg-amber-50 border border-amber-200/60">
+                    <div className="text-xs text-amber-700 font-semibold uppercase tracking-wider">Service Type</div>
+                    <div className="text-sm text-[#0d1b3e] font-bold mt-0.5">{selected.service_type}</div>
+                  </div>
+                )}
                 {selected.number_of_personnel && <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-50"><Users size={18} className="text-amber-600" /><div><div className="text-xs text-gray-400">Personnel Needed</div><div className="text-sm text-[#0d1b3e] font-medium">{selected.number_of_personnel}</div></div></div>}
                 {selected.duration && <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-50"><Clock size={18} className="text-amber-600" /><div><div className="text-xs text-gray-400">Duration</div><div className="text-sm text-[#0d1b3e] font-medium">{selected.duration}</div></div></div>}
                 {selected.location && <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-50"><MapPin size={18} className="text-amber-600" /><div><div className="text-xs text-gray-400">Location</div><div className="text-sm text-[#0d1b3e] font-medium">{selected.location}</div></div></div>}

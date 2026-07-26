@@ -51,7 +51,7 @@ export default function Hero() {
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-extrabold text-white leading-[1.18] sm:leading-[1.15] mb-4 sm:mb-6 tracking-tight">
             Your Trusted Partner for{' '}
             <span className="text-amber-400 font-extrabold block sm:inline">
-              Security & Manpower
+              Security, Manpower &
             </span>{' '}
             Business Solutions
           </h1>

@@ -105,7 +105,7 @@ export default function ContactPage() {
             <div className="space-y-6">
               {[
                 {
-                  q: 'How fast can Hand to Hand Services deploy security personnel to a new site?',
+                  q: 'How fast can Hand to Hand Services Pvt. Ltd deploy security personnel to a new site?',
                   a: 'We maintain a standby reserve force. For standard commercial or residential security guarding in Delhi NCR, deployment can occur within 24 to 48 hours following site assessment.',
                 },
                 {

@@ -15,6 +15,7 @@ import {
   Briefcase,
   Clock,
   Download,
+  MapPin,
 } from 'lucide-react';
 import { StatCard, StatusBadge, formatDate, formatTime } from './_shared';
 import { Toolbar, EmptyState, RowActions, StatusControls } from './ContactsPanel';
@@ -75,7 +76,13 @@ export default function EmployeesPanel() {
   const filtered = items.filter((s) => {
     const matchesFilter = filter === 'all' || s.status === filter;
     const q = search.trim().toLowerCase();
-    const matchesSearch = !q || s.full_name.toLowerCase().includes(q) || s.email.toLowerCase().includes(q) || s.phone.toLowerCase().includes(q) || s.position_applied_for.toLowerCase().includes(q);
+    const matchesSearch =
+      !q ||
+      s.full_name.toLowerCase().includes(q) ||
+      s.email.toLowerCase().includes(q) ||
+      s.phone.toLowerCase().includes(q) ||
+      s.position_applied_for.toLowerCase().includes(q) ||
+      (s.preferred_location && s.preferred_location.toLowerCase().includes(q));
     return matchesFilter && matchesSearch;
   });
 
@@ -126,8 +133,9 @@ export default function EmployeesPanel() {
                       <div className="text-sm text-gray-700 flex items-center gap-1.5 mt-0.5"><Phone size={13} className="text-gray-400" /><a href={`tel:${s.phone}`} className="hover:text-amber-600">{s.phone}</a></div>
                     </td>
                     <td className="px-5 py-4">
-                      <div className="flex items-center gap-1.5 text-sm text-gray-700"><Briefcase size={13} className="text-gray-400" />{s.position_applied_for}</div>
+                      <div className="flex items-center gap-1.5 text-sm text-gray-700 font-medium"><Briefcase size={13} className="text-gray-400" />{s.position_applied_for}</div>
                       {s.experience_years !== null && <div className="flex items-center gap-1.5 text-xs text-gray-400 mt-1"><Clock size={12} />{s.experience_years} yrs experience</div>}
+                      {s.preferred_location && <div className="flex items-center gap-1.5 text-xs text-amber-700 mt-0.5"><MapPin size={12} />{s.preferred_location}</div>}
                     </td>
                     <td className="px-5 py-4">
                       <a href={s.resume_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-lg px-2.5 py-1.5 transition-colors">
@@ -150,6 +158,7 @@ export default function EmployeesPanel() {
                     <StatusBadge status={s.status} />
                   </div>
                   <div className="text-sm text-gray-700 flex items-center gap-1.5 mb-1"><Briefcase size={13} className="text-gray-400" />{s.position_applied_for}</div>
+                  {s.preferred_location && <div className="text-xs text-amber-700 flex items-center gap-1.5 mb-1"><MapPin size={13} />{s.preferred_location}</div>}
                   <div className="text-sm text-gray-700 flex items-center gap-1.5 mb-1"><Mail size={13} className="text-gray-400" /><a href={`mailto:${s.email}`} className="hover:text-amber-600">{s.email}</a></div>
                   <div className="text-sm text-gray-700 flex items-center gap-1.5 mb-2"><Phone size={13} className="text-gray-400" /><a href={`tel:${s.phone}`} className="hover:text-amber-600">{s.phone}</a></div>
                   <a href={s.resume_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-lg px-2.5 py-1.5 mb-3 transition-colors"><FileText size={14} /> View Resume</a>
@@ -182,6 +191,15 @@ export default function EmployeesPanel() {
               <div className="grid grid-cols-1 gap-3">
                 <a href={`mailto:${selected.email}`} className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 hover:bg-amber-50 transition-colors"><Mail size={18} className="text-amber-600" /><div><div className="text-xs text-gray-400">Email</div><div className="text-sm text-[#0d1b3e] font-medium break-all">{selected.email}</div></div></a>
                 <a href={`tel:${selected.phone}`} className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 hover:bg-amber-50 transition-colors"><Phone size={18} className="text-amber-600" /><div><div className="text-xs text-gray-400">Phone</div><div className="text-sm text-[#0d1b3e] font-medium">{selected.phone}</div></div></a>
+                {selected.preferred_location && (
+                  <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-50">
+                    <MapPin size={18} className="text-amber-600" />
+                    <div>
+                      <div className="text-xs text-gray-400">Preferred Location</div>
+                      <div className="text-sm text-[#0d1b3e] font-medium">{selected.preferred_location}</div>
+                    </div>
+                  </div>
+                )}
                 <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-50"><Calendar size={18} className="text-amber-600" /><div><div className="text-xs text-gray-400">Submitted</div><div className="text-sm text-[#0d1b3e] font-medium">{formatDate(selected.created_at)} at {formatTime(selected.created_at)}</div></div></div>
               </div>
               {selected.message && (

@@ -52,7 +52,7 @@ export default function AdminSignupPage() {
               H
             </div>
             <div className="text-left">
-              <div className="text-white font-bold leading-tight">HAND TO HAND</div>
+              <div className="text-white font-bold leading-tight">HHand to Hand Services Pvt. Ltd</div>
               <div className="text-amber-400 text-[10px] font-semibold tracking-wider">
                 SERVICES PVT. LTD.
               </div>

@@ -55,14 +55,12 @@ export default function AdminLoginPage() {
               H
             </div>
             <div className="text-left">
-              <div className="text-white font-bold leading-tight">HAND TO HAND</div>
-              <div className="text-amber-400 text-[10px] font-semibold tracking-wider">
-                SERVICES PVT. LTD.
-              </div>
+              <div className="text-white font-bold leading-tight">Hand to Hand Services Pvt</div>
+
             </div>
           </div>
           <div className="inline-flex items-center gap-2 text-amber-300 text-sm font-semibold">
-            <ShieldCheck size={16} /> Admin Portal
+            <ShieldCheck size={14} /> Admin Portal
           </div>
         </div>
 

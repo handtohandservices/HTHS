@@ -40,6 +40,7 @@ export interface EmployeeApplication {
   phone: string;
   position_applied_for: string;
   experience_years: number | null;
+  preferred_location?: string | null;
   message: string | null;
   resume_url: string;
   resume_public_id: string | null;
@@ -63,6 +64,8 @@ export interface EmployerRequest {
   email: string;
   phone: string;
   services_requested: string[];
+  service_category?: string | null;
+  service_type?: string | null;
   number_of_personnel: string | null;
   duration: string | null;
   location: string | null;

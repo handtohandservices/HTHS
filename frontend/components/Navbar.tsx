@@ -149,7 +149,7 @@ export default function Navbar() {
             className="h-10 sm:h-11 w-auto object-contain rounded-lg transition-transform group-hover:scale-105"
           />
           <div>
-            <div className="text-white font-bold text-sm leading-tight">HAND TO HAND</div>
+            <div className="text-white font-bold text-sm leading-tight">Hand to Hand Services Pvt. Ltd</div>
             <div className="text-amber-400 text-[10px] font-semibold tracking-wider leading-tight">
               SERVICES PVT. LTD.
             </div>
@@ -185,11 +185,10 @@ export default function Navbar() {
                   <>
                     {/* invisible bridge so the menu doesn't close while moving the mouse down */}
                     <div className="absolute top-full left-0 w-full h-2" />
-                    <ul className={`absolute top-full mt-2 ${
-                      link.label === 'Services'
-                        ? 'w-[680px] -left-36 grid grid-cols-2 gap-1 p-2.5'
-                        : 'w-60 left-0 py-2 divide-y divide-white/5'
-                    } bg-[#0d1b3e] border border-amber-500/30 rounded-2xl shadow-2xl overflow-hidden z-50`}>
+                    <ul className={`absolute top-full mt-2 ${link.label === 'Services'
+                      ? 'w-[680px] -left-36 grid grid-cols-2 gap-1 p-2.5'
+                      : 'w-60 left-0 py-2 divide-y divide-white/5'
+                      } bg-[#0d1b3e] border border-amber-500/30 rounded-2xl shadow-2xl overflow-hidden z-50`}>
                       {link.children.map((child) => (
                         <li key={child.label}>
                           <Link

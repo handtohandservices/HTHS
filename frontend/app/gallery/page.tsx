@@ -275,8 +275,8 @@ export default function GalleryPage() {
                   key={cat.slug}
                   onClick={() => setSelectedFilter(cat.slug)}
                   className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all duration-300 ${selectedFilter === cat.slug
-                      ? 'bg-[#0d1b3e] text-amber-400 shadow-md scale-105'
-                      : 'bg-slate-100 text-gray-700 hover:bg-amber-50 hover:text-amber-700'
+                    ? 'bg-[#0d1b3e] text-amber-400 shadow-md scale-105'
+                    : 'bg-slate-100 text-gray-700 hover:bg-amber-50 hover:text-amber-700'
                     }`}
                 >
                   {cat.name}
@@ -312,7 +312,7 @@ export default function GalleryPage() {
                       <div className="w-full h-full bg-gradient-to-br from-[#0d1b3e] to-slate-800 p-4 flex flex-col items-center justify-center text-center text-white">
                         <ImageIcon size={32} className="text-amber-400 mb-2 opacity-80" />
                         <p className="text-xs font-bold text-amber-300 mb-1">{item.title}</p>
-                        <span className="text-[10px] text-gray-400">Hand to Hand Operations</span>
+                        <span className="text-[10px] text-gray-400">Hand to Hand Services Pvt. Ltd Operations</span>
                       </div>
                     )}
 

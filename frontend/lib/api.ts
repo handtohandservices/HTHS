@@ -165,6 +165,7 @@ export const api = {
     phone: string;
     position_applied_for: string;
     experience_years?: string;
+    preferred_location?: string;
     message?: string;
   }, resumeFile: File) {
     const fd = new FormData();
@@ -174,6 +175,7 @@ export const api = {
     fd.append('phone', input.phone);
     fd.append('position_applied_for', input.position_applied_for);
     if (input.experience_years) fd.append('experience_years', input.experience_years);
+    if (input.preferred_location) fd.append('preferred_location', input.preferred_location);
     if (input.message) fd.append('message', input.message);
     return requestForm<{ id: string; resume_url: string }>('/employees', fd);
   },
@@ -200,6 +202,8 @@ export const api = {
     email: string;
     phone: string;
     services_requested: string[];
+    service_category?: string;
+    service_type?: string;
     number_of_personnel?: string;
     duration?: string;
     location?: string;
@@ -255,6 +259,7 @@ export interface EmployeeApplication {
   phone: string;
   position_applied_for: string;
   experience_years: number | null;
+  preferred_location?: string | null;
   message: string | null;
   resume_url: string;
   resume_public_id: string | null;
@@ -278,6 +283,8 @@ export interface EmployerRequest {
   email: string;
   phone: string;
   services_requested: string[];
+  service_category?: string | null;
+  service_type?: string | null;
   number_of_personnel: string | null;
   duration: string | null;
   location: string | null;

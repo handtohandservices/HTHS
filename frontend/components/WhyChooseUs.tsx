@@ -161,7 +161,7 @@ export default function WhyChooseUs() {
               Ready to Transform Your Business Operations?
             </h3>
             <p className="text-gray-300 text-base lg:text-lg leading-relaxed">
-              Join 500+ organizations that trust Hand to Hand for reliable, end-to-end business solutions.
+              Join 500+ organizations that trust Hand to Hand Services Pvt. Ltd for reliable, end-to-end business solutions.
               Get a complimentary strategy session with our senior consultants.
             </p>
           </div>
