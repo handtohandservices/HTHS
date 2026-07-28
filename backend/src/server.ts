@@ -2,7 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import rateLimit from 'express-rate-limit';
 import { config } from './config/env';
 import apiRoutes from './routes';
 import { errorHandler, notFoundHandler } from './middlewares/error';
@@ -18,18 +17,6 @@ app.use(express.urlencoded({ extended: true }));
 if (!config.isProduction) {
   app.use(morgan('dev'));
 }
-
-// Basic rate limiting on the API
-app.use(
-  '/api',
-  rateLimit({
-    windowMs: 60 * 1000,
-    max: 120,
-    standardHeaders: true,
-    legacyHeaders: false,
-    message: { success: false, error: { code: 'rate_limited', message: 'Too many requests, slow down.' } },
-  })
-);
 
 app.get('/', (_req, res) => {
   res.json({ success: true, data: { name: 'Hand to Hand Services API', docs: '/api/health' } });
