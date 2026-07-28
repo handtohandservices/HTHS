@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
 import Link from 'next/link';
+import { api, ApiRequestError } from '@/lib/api';
 import {
   Image as ImageIcon,
   ZoomIn,
@@ -17,6 +18,7 @@ import {
   PhoneCall,
   ArrowRight,
   Filter,
+  Loader2,
 } from 'lucide-react';
 
 interface GalleryItem {
@@ -29,185 +31,68 @@ interface GalleryItem {
   location: string;
 }
 
-const galleryData: GalleryItem[] = [
-  {
-    id: '1',
-    title: 'PSARA Verified Security Guards Deployment',
-    category: 'Private Security',
-    categorySlug: 'security',
-    src: '/Private_Security.jpeg',
-    alt: 'Security guards standing in formation',
-    location: 'Corporate Tower, South Delhi',
-  },
-  {
-    id: '2',
-    title: 'Commercial Deep Cleaning & Janitorial Operations',
-    category: 'Housekeeping & Facilities',
-    categorySlug: 'housekeeping',
-    src: '/Housekeeping.jpeg',
-    alt: 'Housekeeping team cleaning office premises',
-    location: 'IT Park, Gurgaon',
-  },
-  {
-    id: '3',
-    title: 'VIP Escort & Event Bouncer Management',
-    category: 'Events & Cultural',
-    categorySlug: 'events',
-    src: '/Event_Organization.jpeg',
-    alt: 'Event security personnel at stage venue',
-    location: 'Exhibition Center, New Delhi',
-  },
-  {
-    id: '4',
-    title: 'Traditional Cultural Festival Stage Production',
-    category: 'Events & Cultural',
-    categorySlug: 'events',
-    src: '/Cultural_Programs.jpeg',
-    alt: 'Cultural dance stage performance',
-    location: 'Auditorium, Noida',
-  },
-  {
-    id: '5',
-    title: 'Fire Safety, First Aid & Skill Training Workshop',
-    category: 'Skill & AI Training',
-    categorySlug: 'training',
-    src: '/Health_Education.jpeg',
-    alt: 'Security personnel in training workshop',
-    location: 'Training Center, Delhi NCR',
-  },
-  {
-    id: '6',
-    title: 'Lady Guard Training & Empowerment Program',
-    category: 'Women Empowerment',
-    categorySlug: 'women-empowerment',
-    src: '/Women_Empowerment.jpeg',
-    alt: 'Lady security guards in professional attire',
-    location: 'Community Facility, Bhopal',
-  },
-  {
-    id: '7',
-    title: 'Corporate Fleet & Tour Transportation Vehicles',
-    category: 'Logistics & Supplies',
-    categorySlug: 'logistics',
-    src: '/Tour_Travel.jpeg',
-    alt: 'Tour travel luxury bus fleet',
-    location: 'Delhi-NCR Route',
-  },
-  {
-    id: '8',
-    title: 'Express Document Courier & Cargo Dispatch',
-    category: 'Logistics & Supplies',
-    categorySlug: 'logistics',
-    src: '/Courier_Cargo.jpeg',
-    alt: 'Logistics cargo truck and courier parcels',
-    location: 'Distribution Center, Indore',
-  },
-  {
-    id: '9',
-    title: 'Government Tender Materials & Safety Uniforms',
-    category: 'Logistics & Supplies',
-    categorySlug: 'logistics',
-    src: '/Government_Private.jpeg',
-    alt: 'Tender procurement supplies warehouse',
-    location: 'Supply Depot, South Delhi',
-  },
-  {
-    id: '10',
-    title: 'ISO 9001:2015 Quality Systems Audit & Certification',
-    category: 'Private Security',
-    categorySlug: 'security',
-    src: '/ISO.png',
-    alt: 'ISO Certification symbol and quality badge',
-    location: 'Head Office, New Delhi',
-  },
-  {
-    id: '11',
-    title: 'CCTV Control Room & 24/7 Gate Surveillance',
-    category: 'Private Security',
-    categorySlug: 'security',
-    src: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1200&q=80',
-    alt: 'Surveillance monitors in control room',
-    location: 'Industrial Hub, Pithampur',
-  },
-  {
-    id: '12',
-    title: 'Corporate Entrance Access Control Guarding',
-    category: 'Private Security',
-    categorySlug: 'security',
-    src: 'https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&w=1200&q=80',
-    alt: 'Corporate entrance security checkpoint',
-    location: 'Financial Center, Delhi NCR',
-  },
-  {
-    id: '13',
-    title: 'Sanitization & Office Desk Deep Cleaning',
-    category: 'Housekeeping & Facilities',
-    categorySlug: 'housekeeping',
-    src: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80',
-    alt: 'Professional office sanitizer at work',
-    location: 'Commercial Complex, Gurgaon',
-  },
-  {
-    id: '14',
-    title: 'Industrial Floor Machine Polishing & Maintenance',
-    category: 'Housekeeping & Facilities',
-    categorySlug: 'housekeeping',
-    src: 'https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?auto=format&fit=crop&w=1200&q=80',
-    alt: 'Industrial floor scrubber machine operation',
-    location: 'Warehouse Center, Noida',
-  },
-  {
-    id: '15',
-    title: 'High-Profile Concert VIP Escort & Stage Lighting',
-    category: 'Events & Cultural',
-    categorySlug: 'events',
-    src: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80',
-    alt: 'Stage lights and crowd security control',
-    location: 'Stadia Ground, New Delhi',
-  },
-  {
-    id: '16',
-    title: 'Practical AI & Digital Literacy Workshop for Staff',
-    category: 'Skill & AI Training',
-    categorySlug: 'training',
-    src: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80',
-    alt: 'Staff members interacting during computer workshop',
-    location: 'Skill Academy, South Delhi',
-  },
-  {
-    id: '17',
-    title: 'Front Desk & Hospitality Executive Placement',
-    category: 'Women Empowerment',
-    categorySlug: 'women-empowerment',
-    src: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80',
-    alt: 'Executive woman in corporate setting',
-    location: 'Corporate Office, Noida',
-  },
-  {
-    id: '18',
-    title: 'Express Parcel Cargo Distribution Logistics',
-    category: 'Logistics & Supplies',
-    categorySlug: 'logistics',
-    src: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80',
-    alt: 'Cargo warehouse loading operation',
-    location: 'Logistics Park, Greater Noida',
-  },
-];
-
-const categories = [
-  { name: 'All Photos', slug: 'all' },
-  { name: 'Private Security', slug: 'security' },
-  { name: 'Housekeeping & Facilities', slug: 'housekeeping' },
-  { name: 'Events & Cultural', slug: 'events' },
-  { name: 'Skill & AI Training', slug: 'training' },
-  { name: 'Women Empowerment', slug: 'women-empowerment' },
-  { name: 'Logistics & Supplies', slug: 'logistics' },
-];
-
 export default function GalleryPage() {
+  const [galleryData, setGalleryData] = useState<GalleryItem[]>([]);
+  const [fetching, setFetching] = useState(true);
+  const [fetchError, setFetchError] = useState<string | null>(null);
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [activeModalIndex, setActiveModalIndex] = useState<number | null>(null);
   const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
+  const tabsRef = useRef<HTMLDivElement>(null);
+
+  const scrollTabs = (direction: 'left' | 'right') => {
+    if (tabsRef.current) {
+      const scrollAmount = 200;
+      tabsRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  const defaultCategories = [
+    { name: 'Private Security', slug: 'security' },
+    { name: 'Housekeeping & Facilities', slug: 'housekeeping' },
+    { name: 'Events & Cultural', slug: 'events' },
+    { name: 'Skill & AI Training', slug: 'training' },
+    { name: 'Women Empowerment', slug: 'women-empowerment' },
+    { name: 'Logistics & Supplies', slug: 'logistics' },
+  ];
+
+  const categories = [
+    { name: 'All Photos', slug: 'all' },
+    ...Array.from(
+      new Map([
+        ...defaultCategories.map((c) => [c.slug, c.name]),
+        ...galleryData.map((item) => [item.categorySlug, item.category]),
+      ]).entries()
+    ).map(([slug, name]) => ({ name, slug })),
+  ];
+
+  useEffect(() => {
+    async function load() {
+      setFetching(true);
+      setFetchError(null);
+      try {
+        const data = await api.listGallery();
+        const mapped = (data || []).map((item) => ({
+          id: item.id,
+          title: item.title,
+          category: item.category,
+          categorySlug: item.category_slug,
+          src: item.src,
+          alt: item.alt,
+          location: item.location,
+        }));
+        setGalleryData(mapped);
+      } catch (err) {
+        setFetchError('Failed to load gallery images.');
+      } finally {
+        setFetching(false);
+      }
+    }
+    load();
+  }, []);
 
   const filteredData =
     selectedFilter === 'all'
@@ -263,13 +148,28 @@ export default function GalleryPage() {
 
 
         {/* Filter Navigation Tabs */}
-        <section className="sticky top-16 z-30 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm py-4">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 sm:pb-0 sm:justify-center">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-gray-500 pr-2 shrink-0 border-r border-gray-200">
-                <Filter size={14} className="text-amber-500" />
-                <span>Filter:</span>
-              </div>
+        <section className="sticky top-[56px] sm:top-[60px] z-30 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm py-4">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-3">
+            {/* Pinned Filter Label */}
+            <div className="flex items-center gap-1.5 text-xs font-bold text-gray-500 pr-3 shrink-0 border-r border-gray-200">
+              <Filter size={14} className="text-amber-500" />
+              <span>Filter:</span>
+            </div>
+
+            {/* Left Scroll Button */}
+            <button
+              onClick={() => scrollTabs('left')}
+              className="hidden sm:inline-flex p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-gray-700 hover:text-[#0d1b3e] transition-colors shrink-0 shadow-sm border border-gray-200"
+              aria-label="Scroll Left"
+            >
+              <ChevronLeft size={16} />
+            </button>
+
+            {/* Scrollable Container */}
+            <div
+              ref={tabsRef}
+              className="flex-1 flex items-center gap-2 overflow-x-auto no-scrollbar py-2.5 px-3 scroll-smooth"
+            >
               {categories.map((cat) => (
                 <button
                   key={cat.slug}
@@ -283,38 +183,61 @@ export default function GalleryPage() {
                 </button>
               ))}
             </div>
+
+            {/* Right Scroll Button */}
+            <button
+              onClick={() => scrollTabs('right')}
+              className="hidden sm:inline-flex p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-gray-700 hover:text-[#0d1b3e] transition-colors shrink-0 shadow-sm border border-gray-200"
+              aria-label="Scroll Right"
+            >
+              <ChevronRight size={16} />
+            </button>
           </div>
         </section>
 
         {/* Gallery Grid */}
         <section className="py-12 lg:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-              {filteredData.map((item, index) => {
-                const isFailed = failedImages[item.id];
+            {fetching ? (
+              <div className="flex flex-col items-center justify-center py-20 text-gray-500">
+                <Loader2 className="animate-spin text-amber-500 mb-3" size={32} />
+                <p className="text-sm font-bold">Loading gallery photos...</p>
+              </div>
+            ) : fetchError ? (
+              <div className="text-center py-20 text-red-600 font-bold">
+                {fetchError}
+              </div>
+            ) : filteredData.length === 0 ? (
+              <div className="text-center py-20 text-gray-500 font-bold">
+                No photos found in this category.
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
+                {filteredData.map((item, index) => {
+                  const isFailed = failedImages[item.id];
 
-                return (
-                  <div
-                    key={item.id}
-                    onClick={() => !isFailed && setActiveModalIndex(index)}
-                    className="group relative rounded-2xl overflow-hidden shadow-md border border-gray-200/80 bg-slate-900 cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 aspect-[4/3]"
-                  >
-                    {!isFailed ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={item.src}
-                        alt={item.alt}
-                        onError={() => handleImageError(item.id)}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95 group-hover:opacity-100"
-                      />
-                    ) : (
-                      /* Fallback card */
-                      <div className="w-full h-full bg-gradient-to-br from-[#0d1b3e] to-slate-800 p-4 flex flex-col items-center justify-center text-center text-white">
-                        <ImageIcon size={32} className="text-amber-400 mb-2 opacity-80" />
-                        <p className="text-xs font-bold text-amber-300 mb-1">{item.title}</p>
-                        <span className="text-[10px] text-gray-400">Hand to Hand Services Pvt. Ltd Operations</span>
-                      </div>
-                    )}
+                  return (
+                    <div
+                      key={item.id}
+                      onClick={() => !isFailed && setActiveModalIndex(index)}
+                      className="group relative rounded-2xl overflow-hidden shadow-md border border-gray-200/80 bg-slate-900 cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 aspect-[4/3]"
+                    >
+                      {!isFailed ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={item.src}
+                          alt={item.alt}
+                          onError={() => handleImageError(item.id)}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95 group-hover:opacity-100"
+                        />
+                      ) : (
+                        /* Fallback card */
+                        <div className="w-full h-full bg-gradient-to-br from-[#0d1b3e] to-slate-800 p-4 flex flex-col items-center justify-center text-center text-white">
+                          <ImageIcon size={32} className="text-amber-400 mb-2 opacity-80" />
+                          <p className="text-xs font-bold text-amber-300 mb-1">{item.title}</p>
+                          <span className="text-[10px] text-gray-400">Hand to Hand Services Pvt. Ltd Operations</span>
+                        </div>
+                      )}
 
                     {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
@@ -339,9 +262,10 @@ export default function GalleryPage() {
                       </span>
                     </div>
                   </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </section>
 

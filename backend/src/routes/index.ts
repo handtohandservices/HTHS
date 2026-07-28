@@ -3,6 +3,7 @@ import authRoutes from './authRoutes';
 import contactRoutes from './contactRoutes';
 import employeeRoutes from './employeeRoutes';
 import employerRoutes from './employerRoutes';
+import galleryRoutes from './galleryRoutes';
 
 const router = Router();
 
@@ -14,5 +15,6 @@ router.use('/auth', authRoutes);
 router.use('/contacts', contactRoutes);
 router.use('/employees', employeeRoutes);
 router.use('/employers', employerRoutes);
+router.use('/gallery', galleryRoutes);
 
 export default router;

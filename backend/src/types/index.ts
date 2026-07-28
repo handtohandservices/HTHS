@@ -80,3 +80,18 @@ export interface EmployerRequestStats {
   reviewed: number;
   archived: number;
 }
+
+// ===== Gallery =====
+
+export interface GalleryItem {
+  id: string;
+  title: string;
+  category: string;
+  category_slug: string;
+  src: string;
+  alt: string;
+  location: string;
+  image_public_id: string | null;
+  created_at: string;
+}
+

@@ -55,12 +55,45 @@ export const cloudinaryUploader = {
   },
 
   /**
+   * Upload an image buffer to Cloudinary.
+   * Returns { url, public_id }.
+   */
+  async uploadImage(
+    buffer: Buffer,
+    filename: string
+  ): Promise<{ url: string; public_id: string }> {
+    const publicId = `gallery/${filename.replace(/\.[^.]+$/, '')}-${Date.now()}`;
+
+    return new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          resource_type: 'image',
+          public_id: publicId,
+        },
+        (err, result?: UploadApiResponse) => {
+          if (err || !result) {
+            reject(err || new Error('Cloudinary image upload failed.'));
+            return;
+          }
+
+          resolve({
+            url: result.secure_url,
+            public_id: result.public_id,
+          });
+        }
+      );
+
+      Readable.from(buffer).pipe(uploadStream);
+    });
+  },
+
+  /**
    * Delete a file from Cloudinary by public_id.
    */
-  async remove(publicId: string): Promise<void> {
+  async remove(publicId: string, resourceType: 'raw' | 'image' = 'raw'): Promise<void> {
     try {
       await cloudinary.uploader.destroy(publicId, {
-        resource_type: 'raw',
+        resource_type: resourceType,
       });
     } catch (err) {
       // Non-fatal — log and continue

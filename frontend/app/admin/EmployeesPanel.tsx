@@ -16,6 +16,8 @@ import {
   Clock,
   Download,
   MapPin,
+  ChevronDown,
+  Search,
 } from 'lucide-react';
 import { StatCard, StatusBadge, formatDate, formatTime } from './_shared';
 import { Toolbar, EmptyState, RowActions, StatusControls } from './ContactsPanel';
@@ -28,6 +30,7 @@ export default function EmployeesPanel() {
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState<Filter>('all');
+  const [positionFilter, setPositionFilter] = useState('all');
   const [selected, setSelected] = useState<EmployeeApplication | null>(null);
   const [actionLoading, setActionLoading] = useState<string | null>(null);
 
@@ -87,8 +90,13 @@ export default function EmployeesPanel() {
     return s.message.replace(/\[Preferred Location:\s*([^\]]+)\]\n?/, '').trim();
   };
 
+  const uniquePositions = Array.from(
+    new Set(items.map((it) => it.position_applied_for).filter(Boolean))
+  );
+
   const filtered = items.filter((s) => {
     const matchesFilter = filter === 'all' || s.status === filter;
+    const matchesPosition = positionFilter === 'all' || s.position_applied_for === positionFilter;
     const loc = getLocation(s);
     const q = search.trim().toLowerCase();
     const matchesSearch =
@@ -98,7 +106,7 @@ export default function EmployeesPanel() {
       s.phone.toLowerCase().includes(q) ||
       s.position_applied_for.toLowerCase().includes(q) ||
       (loc && loc.toLowerCase().includes(q));
-    return matchesFilter && matchesSearch;
+    return matchesFilter && matchesPosition && matchesSearch;
   });
 
   const counts = {
@@ -119,7 +127,54 @@ export default function EmployeesPanel() {
         <StatCard label="Archived" value={counts.archived} color="gray" />
       </div>
 
-      <Toolbar search={search} setSearch={setSearch} filter={filter} setFilter={setFilter} filters={['all', 'new', 'reviewed', 'archived']} />
+      {/* Toolbar with Search, Position Filter, and Status Filter */}
+      <div className="bg-white rounded-2xl border border-gray-200 p-4 mb-4 flex flex-col md:flex-row gap-3 md:items-center justify-between">
+        <div className="flex flex-col sm:flex-row gap-3 flex-1">
+          {/* Search input */}
+          <div className="relative flex-1 min-w-[200px]">
+            <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search candidate, email, phone, position..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition text-sm"
+            />
+          </div>
+
+          {/* Position Filter Dropdown */}
+          <div className="relative min-w-[220px]">
+            <Briefcase size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-amber-600 pointer-events-none" />
+            <select
+              value={positionFilter}
+              onChange={(e) => setPositionFilter(e.target.value)}
+              className="w-full pl-9 pr-8 py-2.5 rounded-lg border border-amber-200 bg-amber-50/60 hover:bg-amber-50 focus:bg-white focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition text-xs font-semibold text-[#0d1b3e] appearance-none cursor-pointer"
+            >
+              <option value="all">All Applied Positions</option>
+              {uniquePositions.map((pos) => (
+                <option key={pos} value={pos}>
+                  {pos}
+                </option>
+              ))}
+            </select>
+            <ChevronDown size={16} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+          </div>
+        </div>
+
+        {/* Status filters */}
+        <div className="flex gap-1.5 bg-gray-100 rounded-lg p-1 shrink-0 self-start md:self-auto">
+          {(['all', 'new', 'reviewed', 'archived'] as Filter[]).map((f) => (
+            <button
+              key={f}
+              onClick={() => setFilter(f)}
+              className={`px-3 py-1.5 rounded-md text-xs font-semibold capitalize transition-colors ${filter === f ? 'bg-white text-[#0d1b3e] shadow-sm' : 'text-gray-500 hover:text-gray-700'
+                }`}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+      </div>
 
       <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
         {fetching ? (

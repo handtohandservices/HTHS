@@ -21,8 +21,12 @@ export const signUp = asyncHandler(async (req: Request, res: Response, _next: Ne
     throw ApiError.badRequest(parsed.error.issues[0]?.message || 'Invalid input.');
   }
 
-  const session = await authService.signUp(parsed.data.email, parsed.data.password);
-  ok(res, { admin_id: session.admin_id, email: session.email, token: session.token, expires_at: session.expires_at }, 201);
+  try {
+    const session = await authService.signUp(parsed.data.email, parsed.data.password);
+    ok(res, { admin_id: session.admin_id, email: session.email, token: session.token, expires_at: session.expires_at }, 201);
+  } catch (err: any) {
+    throw ApiError.badRequest(err.message || 'An admin account with this email already exists.');
+  }
 });
 
 export const signIn = asyncHandler(async (req: Request, res: Response, _next: NextFunction) => {
@@ -31,8 +35,12 @@ export const signIn = asyncHandler(async (req: Request, res: Response, _next: Ne
     throw ApiError.badRequest(parsed.error.issues[0]?.message || 'Invalid input.');
   }
 
-  const session = await authService.signIn(parsed.data.email, parsed.data.password);
-  ok(res, { admin_id: session.admin_id, email: session.email, token: session.token, expires_at: session.expires_at });
+  try {
+    const session = await authService.signIn(parsed.data.email, parsed.data.password);
+    ok(res, { admin_id: session.admin_id, email: session.email, token: session.token, expires_at: session.expires_at });
+  } catch (err: any) {
+    throw ApiError.unauthorized(err.message || 'Invalid email or password.');
+  }
 });
 
 export const signOut = asyncHandler(async (req: Request, res: Response, _next: NextFunction) => {
@@ -44,4 +52,27 @@ export const signOut = asyncHandler(async (req: Request, res: Response, _next: N
 export const me = asyncHandler(async (req: Request, res: Response, _next: NextFunction) => {
   if (!req.admin) throw ApiError.unauthorized();
   ok(res, { admin_id: req.admin.admin_id, email: req.admin.email });
+});
+
+const resetPasswordSchema = z.object({
+  password: z.string().min(6, 'Password must be at least 6 characters.'),
+});
+
+export const resetPassword = asyncHandler(async (req: Request, res: Response, _next: NextFunction) => {
+  const token = getTokenFromHeader(req);
+  if (!token) throw ApiError.unauthorized('No session token provided.');
+
+  const parsed = resetPasswordSchema.safeParse(req.body);
+  if (!parsed.success) {
+    throw ApiError.badRequest(parsed.error.issues[0]?.message || 'Invalid input.');
+  }
+
+  try {
+    const success = await authService.resetPassword(token, parsed.data.password);
+    if (!success) throw ApiError.notFound('Failed to reset password.');
+    ok(res, { success: true });
+  } catch (err: any) {
+    if (err instanceof ApiError) throw err;
+    throw ApiError.badRequest(err.message || 'Failed to reset password.');
+  }
 });

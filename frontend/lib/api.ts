@@ -86,14 +86,14 @@ async function request<T>(
  * The browser sets the Content-Type + boundary automatically, so we must NOT
  * set it ourselves.
  */
-async function requestForm<T>(path: string, formData: FormData): Promise<T> {
+async function requestForm<T>(path: string, formData: FormData, method: string = 'POST'): Promise<T> {
   const token = tokenStorage.get();
   const headers: Record<string, string> = {};
   if (token) headers['Authorization'] = `Bearer ${token}`;
 
   let res: Response;
   try {
-    res = await fetch(`${API_URL}${path}`, { method: 'POST', body: formData, headers });
+    res = await fetch(`${API_URL}${path}`, { method, body: formData, headers });
   } catch {
     throw new ApiRequestError(0, 'network', 'Cannot reach the server. Please try again.');
   }
@@ -229,6 +229,24 @@ export const api = {
   deleteEmployerRequest(id: string) {
     return request<{ id: string; deleted: boolean }>(`/employers/${id}`, { method: 'DELETE' });
   },
+  listGallery() {
+    return request<GalleryItem[]>('/gallery');
+  },
+  createGalleryItem(formData: FormData) {
+    return requestForm<{ id: string; src: string }>('/gallery', formData);
+  },
+  updateGalleryItem(id: string, formData: FormData) {
+    return requestForm<{ id: string; src: string; updated: boolean }>(`/gallery/${id}`, formData, 'PUT');
+  },
+  deleteGalleryItem(id: string) {
+    return request<{ id: string; deleted: boolean }>(`/gallery/${id}`, { method: 'DELETE' });
+  },
+  resetPassword(password: string) {
+    return request<{ success: boolean }>('/auth/reset-password', {
+      method: 'PUT',
+      body: JSON.stringify({ password }),
+    });
+  },
 };
 
 export type SubmissionStatus = 'new' | 'read' | 'archived';
@@ -299,3 +317,16 @@ export interface EmployerRequestStats {
   reviewed: number;
   archived: number;
 }
+
+export interface GalleryItem {
+  id: string;
+  title: string;
+  category: string;
+  category_slug: string;
+  src: string;
+  alt: string;
+  location: string;
+  image_public_id: string | null;
+  created_at: string;
+}
+

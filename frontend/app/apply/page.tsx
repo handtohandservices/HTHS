@@ -73,6 +73,8 @@ function ApplyPortal() {
   const [empError, setEmpError] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
+  const [positionApplied, setPositionApplied] = useState('');
+  const [isCustomPosition, setIsCustomPosition] = useState(false);
 
   // Employer Form State
   const [emprSubmitting, setEmprSubmitting] = useState(false);
@@ -118,7 +120,9 @@ function ApplyPortal() {
     const fullName = String(fd.get('full_name') || '').trim();
     const email = String(fd.get('email') || '').trim();
     const phone = String(fd.get('phone') || '').trim();
-    const position = String(fd.get('position_applied_for') || '').trim();
+    const positionSelect = String(fd.get('position_applied_for') || '').trim();
+    const customPosition = String(fd.get('custom_position_applied_for') || '').trim();
+    const position = positionSelect === 'Other' ? customPosition : positionSelect;
     const experience = String(fd.get('experience_years') || '').trim();
     const preferredLocation = String(fd.get('preferred_location') || '').trim();
     const message = String(fd.get('message') || '').trim();
@@ -146,6 +150,8 @@ function ApplyPortal() {
         file
       );
       setEmpSubmitted(true);
+      setPositionApplied('');
+      setIsCustomPosition(false);
       form.reset();
       clearFile();
     } catch (err) {
@@ -323,7 +329,53 @@ function ApplyPortal() {
 
               <div className="grid sm:grid-cols-2 gap-5">
                 <Field icon={<Phone size={18} />} label="Phone *" name="phone" type="tel" placeholder="Your phone number" required={true} />
-                <Field icon={<Briefcase size={18} />} label="Position Applied For *" name="position_applied_for" placeholder="e.g. Security Guard" required={true} />
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Position Applied For *</label>
+                  <div className="relative">
+                    <Briefcase size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                    <select
+                      name="position_applied_for"
+                      required
+                      value={positionApplied}
+                      onChange={(e) => {
+                        setPositionApplied(e.target.value);
+                        setIsCustomPosition(e.target.value === 'Other');
+                      }}
+                      className="w-full pl-10 pr-8 py-3 rounded-xl border border-gray-200 bg-white focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition text-sm appearance-none cursor-pointer"
+                    >
+                      <option value="">Select Position</option>
+                      <option value="Security Guard (Male/Female)">Security Guard (Male/Female)</option>
+                      <option value="Security Supervisor">Security Supervisor</option>
+                      <option value="Bouncer / VIP Escort">Bouncer / VIP Escort</option>
+                      <option value="Gunman">Gunman</option>
+                      <option value="Housekeeper / Cleaning Staff">Housekeeper / Cleaning Staff</option>
+                      <option value="Pantry Boy / Office Peon">Pantry Boy / Office Peon</option>
+                      <option value="Gardener">Gardener</option>
+                      <option value="Skilled Trades (Plumber/Carpenter/Electrician/Painter/AC)">Skilled Trades (Plumber/Carpenter/Electrician/Painter/AC)</option>
+                      <option value="Nurse / Wardboy / Caretaker">Nurse / Wardboy / Caretaker</option>
+                      <option value="Teacher / AI & Technical Trainer">Teacher / AI & Technical Trainer</option>
+                      <option value="Driver (Cab/Bus/Logistics)">Driver (Cab/Bus/Logistics)</option>
+                      <option value="Logistics Staff / Delivery Executive">Logistics Staff / Delivery Executive</option>
+                      <option value="Office / Back Office Staff">Office / Back Office Staff</option>
+                      <option value="Mason / Construction Labour">Mason / Construction Labour</option>
+                      <option value="Event & Cultural Staff">Event & Cultural Staff</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    <ChevronDown size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                  </div>
+
+                  {isCustomPosition && (
+                    <div className="mt-3 animate-in fade-in slide-in-from-top-2 duration-200">
+                      <Field 
+                        icon={<Briefcase size={18} />} 
+                        label="Specify Custom Position *" 
+                        name="custom_position_applied_for" 
+                        placeholder="e.g. Accountant" 
+                        required={true} 
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-5">

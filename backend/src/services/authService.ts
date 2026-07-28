@@ -57,4 +57,13 @@ export const authService = {
     if (!row?.admin_id) return null;
     return { admin_id: row.admin_id, email: row.email };
   },
+
+  async resetPassword(token: string, newPassword: string): Promise<boolean> {
+    const { data, error } = await supabase.rpc('admin_reset_password', {
+      p_token: token,
+      p_new_password: newPassword,
+    });
+    if (error) throw error;
+    return Boolean(data);
+  },
 };
