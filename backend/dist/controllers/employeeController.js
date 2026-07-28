@@ -32,7 +32,11 @@ exports.uploadResume = upload.single('resume');
 const bodyShape = (value) => {
     const schema = zod_1.z.object({
         full_name: zod_1.z.string().min(1, 'Full name is required.').max(200),
-        email: zod_1.z.string().email('A valid email is required.').max(200),
+        email: zod_1.z
+            .string()
+            .max(200)
+            .optional()
+            .transform((v) => v ?? ''),
         phone: zod_1.z.string().min(1, 'Phone is required.').max(50),
         position_applied_for: zod_1.z.string().min(1, 'Position is required.').max(200),
         experience_years: zod_1.z
@@ -44,6 +48,7 @@ const bodyShape = (value) => {
             const n = typeof v === 'number' ? v : parseInt(v, 10);
             return Number.isFinite(n) && n >= 0 ? n : null;
         }),
+        preferred_location: zod_1.z.string().max(300).optional().transform((v) => v ?? null),
         message: zod_1.z.string().max(5000).optional().transform((v) => v ?? null),
     });
     return schema.safeParse(value);

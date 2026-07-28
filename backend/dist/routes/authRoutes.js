@@ -8,5 +8,6 @@ router.post('/signup', authController_1.signUp);
 router.post('/signin', authController_1.signIn);
 router.post('/signout', authController_1.signOut);
 router.get('/me', auth_1.requireAuth, authController_1.me);
+router.put('/reset-password', auth_1.requireAuth, authController_1.resetPassword);
 exports.default = router;
 //# sourceMappingURL=authRoutes.js.map

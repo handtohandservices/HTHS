@@ -4,17 +4,42 @@ exports.employerService = void 0;
 const supabase_1 = require("../config/supabase");
 exports.employerService = {
     async create(input) {
-        const { data, error } = await supabase_1.supabase.rpc('create_employer_request', {
+        const services = [...input.services_requested];
+        if (input.service_category && input.service_type) {
+            const combined = `${input.service_category}: ${input.service_type}`;
+            if (!services.includes(combined) && !services.includes(input.service_type)) {
+                services.unshift(combined);
+            }
+        }
+        let { data, error } = await supabase_1.supabase.rpc('create_employer_request', {
             p_company_name: input.company_name,
             p_contact_person: input.contact_person,
             p_email: input.email,
             p_phone: input.phone,
-            p_services: input.services_requested,
+            p_services: services,
             p_number_of_personnel: input.number_of_personnel,
             p_duration: input.duration,
             p_location: input.location,
             p_message: input.message,
+            p_service_category: input.service_category || null,
+            p_service_type: input.service_type || null,
         });
+        if (error && (error.message?.includes('function') || error.code === 'PGRST202')) {
+            const fallbackRes = await supabase_1.supabase.rpc('create_employer_request', {
+                p_company_name: input.company_name,
+                p_contact_person: input.contact_person,
+                p_email: input.email,
+                p_phone: input.phone,
+                p_services: services,
+                p_number_of_personnel: input.number_of_personnel,
+                p_duration: input.duration,
+                p_location: input.location,
+                p_message: input.message,
+            });
+            if (fallbackRes.error)
+                throw fallbackRes.error;
+            return fallbackRes.data;
+        }
         if (error)
             throw error;
         return data;

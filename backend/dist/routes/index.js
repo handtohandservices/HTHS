@@ -8,6 +8,7 @@ const authRoutes_1 = __importDefault(require("./authRoutes"));
 const contactRoutes_1 = __importDefault(require("./contactRoutes"));
 const employeeRoutes_1 = __importDefault(require("./employeeRoutes"));
 const employerRoutes_1 = __importDefault(require("./employerRoutes"));
+const galleryRoutes_1 = __importDefault(require("./galleryRoutes"));
 const router = (0, express_1.Router)();
 router.get('/health', (_req, res) => {
     res.json({ success: true, data: { status: 'ok', service: 'handtohand-api', version: '1.0.0' } });
@@ -16,5 +17,6 @@ router.use('/auth', authRoutes_1.default);
 router.use('/contacts', contactRoutes_1.default);
 router.use('/employees', employeeRoutes_1.default);
 router.use('/employers', employerRoutes_1.default);
+router.use('/gallery', galleryRoutes_1.default);
 exports.default = router;
 //# sourceMappingURL=index.js.map

@@ -55,5 +55,14 @@ exports.authService = {
             return null;
         return { admin_id: row.admin_id, email: row.email };
     },
+    async resetPassword(token, newPassword) {
+        const { data, error } = await supabase_1.supabase.rpc('admin_reset_password', {
+            p_token: token,
+            p_new_password: newPassword,
+        });
+        if (error)
+            throw error;
+        return Boolean(data);
+    },
 };
 //# sourceMappingURL=authService.js.map

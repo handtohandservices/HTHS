@@ -27,11 +27,18 @@ const services = [
 const createSchema = zod_1.z.object({
     company_name: zod_1.z.string().min(1, 'Company name is required.').max(200),
     contact_person: zod_1.z.string().min(1, 'Contact person is required.').max(200),
-    email: zod_1.z.string().email('A valid email is required.').max(200),
+    email: zod_1.z
+        .string()
+        .max(200)
+        .optional()
+        .transform((v) => v ?? ''),
     phone: zod_1.z.string().min(1, 'Phone is required.').max(50),
     services_requested: zod_1.z
         .array(zod_1.z.string())
-        .min(1, 'Select at least one service.'),
+        .optional()
+        .transform((v) => v ?? []),
+    service_category: zod_1.z.string().max(200).optional().transform((v) => v ?? null),
+    service_type: zod_1.z.string().max(200).optional().transform((v) => v ?? null),
     number_of_personnel: zod_1.z.string().max(100).optional().transform((v) => v ?? null),
     duration: zod_1.z.string().max(200).optional().transform((v) => v ?? null),
     location: zod_1.z.string().max(300).optional().transform((v) => v ?? null),
