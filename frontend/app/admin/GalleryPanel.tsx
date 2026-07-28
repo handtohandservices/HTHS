@@ -187,8 +187,8 @@ export default function GalleryPanel() {
   );
   const filterCategories = Array.from(
     new Map([
-      ...defaultCategoriesObj.map((c) => [c.slug, c.name]),
-      ...items.map((item) => [item.category_slug, item.category]),
+      ...defaultCategoriesObj.map((c) => [c.slug, c.name] as [string, string]),
+      ...items.map((item) => [item.category_slug, item.category] as [string, string]),
     ]).entries()
   ).map(([slug, name]) => ({ name, slug }));
 

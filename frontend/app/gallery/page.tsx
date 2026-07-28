@@ -63,8 +63,8 @@ export default function GalleryPage() {
     { name: 'All Photos', slug: 'all' },
     ...Array.from(
       new Map([
-        ...defaultCategories.map((c) => [c.slug, c.name]),
-        ...galleryData.map((item) => [item.categorySlug, item.category]),
+        ...defaultCategories.map((c) => [c.slug, c.name] as [string, string]),
+        ...galleryData.map((item) => [item.categorySlug, item.category] as [string, string]),
       ]).entries()
     ).map(([slug, name]) => ({ name, slug })),
   ];
